@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Term
+  - Result
+  - Sign Button
+  - Result Button
   layers:
   - Default
   - TransparentFX
