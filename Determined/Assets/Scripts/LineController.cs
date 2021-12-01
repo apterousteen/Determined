@@ -63,7 +63,5 @@ public class LineController : MonoBehaviour
     {
         lr.positionCount = 0;
         points.Clear();
-        foreach (var matrixObject in objects)
-            matrixObject.MakeMatrixObjectActive();
     }
 }

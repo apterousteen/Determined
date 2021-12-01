@@ -18,10 +18,10 @@ public class ResultBoard : MonoBehaviour
     private List<int> terms;
     public List<TMP_Text> resultElementsUI;
     private List<TMP_Text> signElementsUI;
-    private MatrixObject[] matrixObjects;
+    public MatrixObject[] matrixObjects;
     private ButtonsManager buttonsManager;
 
-    public MatrixObject[] objects;
+    //public MatrixObject[] objects;
     public DeterminantType typeOfResult;
     
     private void Awake()
@@ -37,7 +37,10 @@ public class ResultBoard : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            objects = GetChosenMatrixObjects();
+            var objects = GetChosenMatrixObjects();
+            foreach (var matrixObject in objects)
+                matrixObject.MakeMatrixObjectActive();
+            if (objects.Length == 0) Debug.Log("objects not captured");
             CalculateAnswerForDouble(objects);
         }
     }
