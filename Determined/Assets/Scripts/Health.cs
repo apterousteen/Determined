@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -12,11 +13,18 @@ public class Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    [Header("Menus")]
+    [SerializeField] private GameObject failMenu = null;
+
+    bool gameHasEnded;
+
     void Update()
     {
-        if (healthValue == 0)
+        if (healthValue == 0 && gameHasEnded == false)
         {
+            gameHasEnded = true;
             Debug.Log("fail screen");
+            failMenu.SetActive(true);
         }
 
         if (healthValue > fullHealth)

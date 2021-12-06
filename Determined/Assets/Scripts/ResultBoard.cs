@@ -62,7 +62,7 @@ public class ResultBoard : MonoBehaviour
 
     private void CalculateAnswerForDouble(MatrixObject[] objects)
     {
-        if (objects.Length != 2)
+        if (objects.Length != 2 && objects.Length != 0)
         {
             Debug.Log("health--");
             health.healthValue--;
