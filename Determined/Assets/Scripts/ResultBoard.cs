@@ -23,7 +23,9 @@ public class ResultBoard : MonoBehaviour
 
     //public MatrixObject[] objects;
     public DeterminantType typeOfResult;
-    
+
+    public Health health;
+
     private void Awake()
     {
         terms = new List<int>();
@@ -61,8 +63,12 @@ public class ResultBoard : MonoBehaviour
     private void CalculateAnswerForDouble(MatrixObject[] objects)
     {
         if (objects.Length != 2)
-            //remove one life
+        {
+            Debug.Log("health--");
+            health.healthValue--;
             return;
+        }
+
         terms.Add(CalculateSimpleDiagonal(objects[0].value, objects[1].value));
         UpdateUI();
         if (terms.Count == 2)

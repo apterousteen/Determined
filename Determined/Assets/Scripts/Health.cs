@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int health;
+    public int healthValue;
     public int fullHealth;
 
     public Image[] hearts;
@@ -14,13 +14,18 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        if (health > fullHealth)
+        if (healthValue == 0)
         {
-            health = fullHealth;
+            Debug.Log("fail screen");
+        }
+
+        if (healthValue > fullHealth)
+        {
+            healthValue = fullHealth;
         }
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < health)
+            if (i < healthValue)
             {
                 hearts[i].sprite = fullHeart;
             }
