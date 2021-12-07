@@ -4665,6 +4665,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 357441000}
   lvlsMenu: {fileID: 126301967}
   mainMenu: {fileID: 136619334}
+  mainMenuForLoad: MainMenuTemp
   fromLvlToSetFlag: 0
 --- !u!4 &1415409352
 Transform:

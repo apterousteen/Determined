@@ -42,7 +42,7 @@ public abstract class MatrixObject : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && currentState != MatrixObjectState.Blocked)
         {
             if (currentState == MatrixObjectState.Active)
                 ChooseMatrixObject();
@@ -52,7 +52,7 @@ public abstract class MatrixObject : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && currentState != MatrixObjectState.Blocked)
             ChooseMatrixObject();
     }
 }

@@ -21,6 +21,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject settingsMenu = null;
     [SerializeField] private GameObject lvlsMenu = null;
     [SerializeField] private GameObject mainMenu = null;
+    public string mainMenuForLoad;
 
     public void StartNewGame()
     {
@@ -30,6 +31,16 @@ public class MenuController : MonoBehaviour
     public void LoadLevel()
     {
         //TO DO
+    }
+
+    public void GoBackToMenu()
+    {
+        SceneManager.LoadScene(mainMenuForLoad);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public bool fromLvlToSetFlag;
