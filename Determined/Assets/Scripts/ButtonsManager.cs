@@ -9,11 +9,13 @@ public class ButtonsManager : MonoBehaviour
 {
     private List<TMP_Text> signElementsUI;
     private MatrixObject[] matrixObjects;
+    private ResultBoard resultBoard;
 
     private void Awake()
     {
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
         matrixObjects = FindObjectsOfType<MatrixObject>();
+        resultBoard = FindObjectOfType<ResultBoard>();
         BlockSignButtons();
     }
 
@@ -23,14 +25,21 @@ public class ButtonsManager : MonoBehaviour
         uiELement.text = "-";
         uiELement.color = Color.blue;
         BlockSignButtons();
+        ActivateMatrix();
     }
 
     public void SetPlusSign()
     {
+        if(resultBoard.typeOfResult == DeterminantType.DoubleMatrix)
+        {
+            resultBoard.LoseHealth();
+            return;
+        }
         var uiELement = signElementsUI.Where(x => x.text == "?").First();
         uiELement.text = "+";
         uiELement.color = Color.red;
         BlockSignButtons();
+        ActivateMatrix();
     }
 
     public void BlockSignButtons()
@@ -61,5 +70,11 @@ public class ButtonsManager : MonoBehaviour
     {
         foreach (var matrixObject in matrixObjects)
             matrixObject.BlockMatrixObject();
+    }
+
+    public void ActivateMatrix()
+    {
+        foreach (var matrixObject in matrixObjects)
+            matrixObject.MakeMatrixObjectActive();
     }
 }

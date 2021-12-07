@@ -15,6 +15,9 @@ public abstract class MatrixObject : MonoBehaviour
     public int value;
     protected LineController lineController;
 
+    public int x;
+    public int y;
+
     protected virtual void Awake()
     {
         lineController = FindObjectOfType<LineController>();

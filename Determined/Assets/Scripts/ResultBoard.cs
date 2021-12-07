@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using System;
 
 public enum DeterminantType
 {
@@ -33,18 +34,71 @@ public class ResultBoard : MonoBehaviour
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
         matrixObjects = FindObjectsOfType<MatrixObject>();
         buttonsManager = GetComponent<ButtonsManager>();
+        SetMatrixObjectsHiddenPositions();
+    }
+
+    private void SetMatrixObjectsHiddenPositions()
+    {
+        var matrixObjectsByX = matrixObjects.OrderBy(x => x.gameObject.GetComponent<Transform>().position.x);
+        int counter = 0;
+        foreach(var matrixObject in matrixObjectsByX)
+        {
+            counter++;
+            matrixObject.x = counter / 3;
+        }
+        var matrixObjectsByY = matrixObjects.OrderByDescending(x => x.gameObject.GetComponent<Transform>().position.y);
+        counter = 0;
+        foreach (var matrixObject in matrixObjectsByY)
+        {
+            counter++;
+            matrixObject.y = counter / 3;
+        }
     }
 
     private void Update()
     {
         if(Input.GetMouseButtonUp(0))
         {
-            var objects = GetChosenMatrixObjects();
-            foreach (var matrixObject in objects)
-                matrixObject.MakeMatrixObjectActive();
-            if (objects.Length == 0) Debug.Log("objects not captured");
-            CalculateAnswerForDouble(objects);
+            if (typeOfResult == DeterminantType.DoubleMatrix) UpdateForDoubleMatrix();
+
         }
+    }
+
+    private void MakeChosenMatrixObjectsActive(MatrixObject[] objects)
+    {
+        foreach (var matrixObject in objects)
+            matrixObject.MakeMatrixObjectActive();
+    }
+
+    private void MakeChosenMatrixObjectsBlocked(MatrixObject[] objects)
+    {
+        foreach (var matrixObject in objects)
+            matrixObject.BlockMatrixObject();
+    }
+
+    private void UpdateForDoubleMatrix()
+    {
+        var objects = GetChosenMatrixObjects();
+        if (objects.Length == 0) return;
+        MakeChosenMatrixObjectsActive(objects);
+        CalculateAnswerForDouble(objects);
+    }
+
+    private void UpdateForLeibniz()
+    {
+        var objects = GetChosenMatrixObjects();
+        if (objects.Length == 0) return;
+        if (matrixObjects.Where(x => x.currentState == MatrixObjectState.Blocked).Count() == 0)
+        {
+            CheckForBlockingMatrixObjects(objects);
+            return;
+        }
+    }
+
+    private bool CheckForBlockingMatrixObjects(MatrixObject[] objects)
+    {
+        if (objects.Length != 5) return false;
+        return true;
     }
 
     private void UpdateUI()
@@ -55,6 +109,12 @@ public class ResultBoard : MonoBehaviour
             buttonsManager.ActivateSignButtons();
     }
 
+    public void LoseHealth()
+    {
+        Debug.Log("health--");
+        health.healthValue--;
+    }
+
     private MatrixObject[] GetChosenMatrixObjects()
     {
         return matrixObjects.Where(x => x.currentState == MatrixObjectState.Chosen).ToArray();
@@ -62,20 +122,29 @@ public class ResultBoard : MonoBehaviour
 
     private void CalculateAnswerForDouble(MatrixObject[] objects)
     {
-        if (objects.Length != 2 && objects.Length != 0)
+        if (objects.Length != 2 || objects[0].x == objects[1].x || objects[0].y == objects[1].y)
         {
-            Debug.Log("health--");
-            health.healthValue--;
+            LoseHealth();
+            return;
+        }
+
+        if(terms.Count == 0 && objects.Where(a => a.x == 0 && a.y ==0).Count() == 0)
+        {
+            LoseHealth();
+            return;
+        }
+
+        if (terms.Count == 1 && objects.Where(a => a.x == 0 && a.y == 1).Count() == 0)
+        {
+            LoseHealth();
             return;
         }
 
         terms.Add(CalculateSimpleDiagonal(objects[0].value, objects[1].value));
         UpdateUI();
+        buttonsManager.BLockMatrix();
         if (terms.Count == 2)
-        {
-            buttonsManager.BLockMatrix();
             buttonsManager.ActivateResultButton();
-        }
     }
 
     private int CalculateSimpleDiagonal(int first, int second)
