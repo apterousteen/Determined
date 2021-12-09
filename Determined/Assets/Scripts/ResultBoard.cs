@@ -59,8 +59,10 @@ public class ResultBoard : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            if (typeOfResult == DeterminantType.DoubleMatrix) UpdateForDoubleMatrix();
-
+            var objects = GetChosenMatrixObjects();
+            MakeChosenMatrixObjectsActive(objects);
+            if (objects.Length <= 1) return;
+            if (typeOfResult == DeterminantType.DoubleMatrix) CalculateAnswerForDouble(objects);
         }
     }
 
@@ -74,14 +76,6 @@ public class ResultBoard : MonoBehaviour
     {
         foreach (var matrixObject in objects)
             matrixObject.BlockMatrixObject();
-    }
-
-    private void UpdateForDoubleMatrix()
-    {
-        var objects = GetChosenMatrixObjects();
-        if (objects.Length == 0) return;
-        MakeChosenMatrixObjectsActive(objects);
-        CalculateAnswerForDouble(objects);
     }
 
     private void UpdateForLeibniz()
