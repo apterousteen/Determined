@@ -6,6 +6,7 @@ using TMPro;
 public class DigitMatrixObject : MatrixObject
 {
     private TMP_Text textWindow;
+    [SerializeField] Sprite chosenMatrixObject = null;
 
     protected override void  Awake()
     {
@@ -17,6 +18,7 @@ public class DigitMatrixObject : MatrixObject
     public override void ChooseMatrixObject()
     {
         base.ChooseMatrixObject();
+        //gameObject.GetComponent<SpriteRenderer>().sprite = chosenMatrixObject;
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
     }
 

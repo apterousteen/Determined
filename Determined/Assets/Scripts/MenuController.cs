@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading;
+using System;
 
 public class MenuController : MonoBehaviour
 {
@@ -14,8 +16,11 @@ public class MenuController : MonoBehaviour
     [Header("Levels")]
     public string _newGameLevel;
     private string levelToLoad;
+
     [SerializeField] private GameObject exitPopup = null;
     [SerializeField] private GameObject creditsPopup = null;
+    [SerializeField] private GameObject winPopup = null;
+    [SerializeField] private GameObject failPopup = null;
 
     [Header("Menus")]
     [SerializeField] private GameObject settingsMenu = null;
@@ -30,7 +35,7 @@ public class MenuController : MonoBehaviour
 
     public void LoadLevel()
     {
-        //TO DO
+        //SceneManager.LoadScene("Triple Matrix");
     }
 
     public void GoBackToMenu()
@@ -81,6 +86,11 @@ public class MenuController : MonoBehaviour
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
         vol = AudioListener.volume;
+    }
+
+    public void OpenWinPopup()
+    {   //TO DO: waiting
+        winPopup.SetActive(true);
     }
 
     //TO DO: audio listener

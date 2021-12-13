@@ -23,7 +23,7 @@ public class ButtonsManager : MonoBehaviour
     {
         var uiELement = signElementsUI.Where(x => x.text == "?").First();
         uiELement.text = "-";
-        uiELement.color = Color.blue;
+        uiELement.color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
         BlockSignButtons();
         ActivateMatrix();
     }
@@ -37,7 +37,7 @@ public class ButtonsManager : MonoBehaviour
         }
         var uiELement = signElementsUI.Where(x => x.text == "?").First();
         uiELement.text = "+";
-        uiELement.color = Color.red;
+        uiELement.color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
         BlockSignButtons();
         ActivateMatrix();
     }
@@ -58,6 +58,9 @@ public class ButtonsManager : MonoBehaviour
 
     public void ActivateResultButton()
     {
+        var line = GameObject.Find("lineBetweenSigns");
+        line.gameObject.SetActive(false);
+
         var buttons = GameObject.FindGameObjectsWithTag("Sign Button");
         foreach (var button in buttons)
             button.SetActive(false);

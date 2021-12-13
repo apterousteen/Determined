@@ -13,6 +13,10 @@ public class Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    public Image[] stars;
+    public Sprite fullStar;
+    public Sprite emptyStar;
+
     [Header("Menus")]
     [SerializeField] private GameObject failMenu = null;
 
@@ -36,10 +40,12 @@ public class Health : MonoBehaviour
             if (i < healthValue)
             {
                 hearts[i].sprite = fullHeart;
+                stars[i].sprite = fullStar;
             }
             else
             {
                 hearts[i].sprite = emptyHeart;
+                stars[i].sprite = emptyStar;
             }
 
             if (i < fullHealth)
