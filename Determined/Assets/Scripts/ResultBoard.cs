@@ -27,6 +27,22 @@ public class ResultBoard : MonoBehaviour
     public DeterminantType typeOfResult;
 
     public Health health;
+    // I hope it's ok this code is here
+    [Header("Flickering of hint button")]
+    public SpriteRenderer sprite = null;
+    public float flickerDuration;
+    public float flickerAmnt;
+
+    IEnumerator DamageFlicker()
+    {
+        for (int i = 0; i < flickerAmnt; i++)
+        {
+            sprite.color = new Color(1f, .9647059f, .3215686f, .2f);
+            yield return new WaitForSeconds(flickerDuration);
+            sprite.color = new Color(1f, 1f, 1f, 0f);
+            yield return new WaitForSeconds(flickerDuration);
+        }
+    }
 
     private void Awake()
     {
@@ -108,6 +124,7 @@ public class ResultBoard : MonoBehaviour
     {
         Debug.Log("health--");
         health.healthValue--;
+        if (health.healthValue != 0) StartCoroutine(DamageFlicker());
     }
 
     private MatrixObject[] GetChosenMatrixObjects()
