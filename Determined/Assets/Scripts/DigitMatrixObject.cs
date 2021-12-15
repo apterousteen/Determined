@@ -10,6 +10,8 @@ public class DigitMatrixObject : MatrixObject
     [SerializeField] Sprite activeMatrixObject = null;
     [SerializeField] Sprite blockedMatrixObject = null;
 
+    public List<TMP_Text> matrixText;
+
     protected override void  Awake()
     {
         base.Awake();
@@ -21,6 +23,7 @@ public class DigitMatrixObject : MatrixObject
     {
         base.ChooseMatrixObject();
         gameObject.GetComponent<SpriteRenderer>().sprite = chosenMatrixObject;
+        textWindow.gameObject.SetActive(false);
         //gameObject.GetComponent<SpriteRenderer>().color = Color.red;
     }
 
@@ -28,6 +31,7 @@ public class DigitMatrixObject : MatrixObject
     {
         base.MakeMatrixObjectActive();
         gameObject.GetComponent<SpriteRenderer>().sprite = activeMatrixObject;
+        textWindow.gameObject.SetActive(true);
         //gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
@@ -35,6 +39,7 @@ public class DigitMatrixObject : MatrixObject
     {
         base.BlockMatrixObject();
         gameObject.GetComponent<SpriteRenderer>().sprite = blockedMatrixObject;
+        textWindow.gameObject.SetActive(false);
         //gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 }

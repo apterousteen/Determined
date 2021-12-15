@@ -220,6 +220,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 0}
   activeMatrixObject: {fileID: 0}
   blockedMatrixObject: {fileID: 0}
+  matrixText: []
 --- !u!61 &16024235
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -731,6 +732,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 21300000, guid: 7245e2a074aac40449b8c0374766296b, type: 3}
   activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
+  matrixText: []
 --- !u!212 &62143479
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1378,6 +1380,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 0}
   activeMatrixObject: {fileID: 0}
   blockedMatrixObject: {fileID: 0}
+  matrixText: []
 --- !u!114 &243907527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,6 +1667,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 0}
   activeMatrixObject: {fileID: 0}
   blockedMatrixObject: {fileID: 0}
+  matrixText: []
 --- !u!114 &293302396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2007,6 +2011,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 21300000, guid: 7245e2a074aac40449b8c0374766296b, type: 3}
   activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
+  matrixText: []
 --- !u!212 &344488067
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2141,12 +2146,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resultElementsUI: []
+  resultBoxes: []
   matrixObjects: []
   typeOfResult: 0
   health: {fileID: 2038215682}
   sprite: {fileID: 1730250755}
   flickerDuration: 0.3
   flickerAmnt: 3
+  updateBox: 0
+  boxIndex: 0
 --- !u!114 &371766316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,6 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359613694f6050d4aab3a4c65f092e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signPlus: 1
 --- !u!1 &394726284
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,6 +3346,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 21300000, guid: 7245e2a074aac40449b8c0374766296b, type: 3}
   activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
+  matrixText: []
 --- !u!212 &753629838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3881,6 +3891,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 21300000, guid: 7245e2a074aac40449b8c0374766296b, type: 3}
   activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
+  matrixText: []
 --- !u!212 &806829573
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5838,6 +5849,7 @@ MonoBehaviour:
   chosenMatrixObject: {fileID: 0}
   activeMatrixObject: {fileID: 0}
   blockedMatrixObject: {fileID: 0}
+  matrixText: []
 --- !u!114 &1119253265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8104,7 +8116,7 @@ GameObject:
   - component: {fileID: 1690031041}
   m_Layer: 5
   m_Name: Result 2
-  m_TagString: Untagged
+  m_TagString: Result Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8342,7 +8354,7 @@ GameObject:
   - component: {fileID: 1756984838}
   m_Layer: 5
   m_Name: Result 1
-  m_TagString: Untagged
+  m_TagString: Result Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8669,7 +8681,7 @@ GameObject:
   - component: {fileID: 1880788589}
   m_Layer: 5
   m_Name: hint sprite
-  m_TagString: Flickering
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

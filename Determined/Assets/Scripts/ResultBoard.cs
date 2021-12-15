@@ -20,6 +20,7 @@ public class ResultBoard : MonoBehaviour
     private List<int> terms;
     public List<TMP_Text> resultElementsUI;
     private List<TMP_Text> signElementsUI;
+    public List<GameObject> resultBoxes;
     public MatrixObject[] matrixObjects;
     private ButtonsManager buttonsManager;
 
@@ -32,6 +33,9 @@ public class ResultBoard : MonoBehaviour
     public SpriteRenderer sprite = null;
     public float flickerDuration;
     public float flickerAmnt;
+
+    public bool updateBox;
+    public int boxIndex = 0;
 
     IEnumerator DamageFlicker()
     {
@@ -49,6 +53,8 @@ public class ResultBoard : MonoBehaviour
         terms = new List<int>();
         resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
+        //
+        resultBoxes = FindObjectsOfType<GameObject>().Where(x => x.gameObject.tag == "Result Box").OrderBy(x => x.gameObject.name).ToList();
         matrixObjects = FindObjectsOfType<MatrixObject>();
         buttonsManager = GetComponent<ButtonsManager>();
         SetMatrixObjectsHiddenPositions();
@@ -114,8 +120,25 @@ public class ResultBoard : MonoBehaviour
 
     private void UpdateUI()
     {
-        for (int i = 0; i < terms.Count; i++)
+        for (int i = 0; i < terms.Count; i++) 
+        { 
             resultElementsUI[i].text = terms[i].ToString();
+        }
+
+        if (updateBox)
+        {
+            if (buttonsManager.signPlus)
+                resultBoxes[boxIndex].GetComponent<Image>().color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
+            else 
+                resultBoxes[boxIndex].GetComponent<Image>().color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
+
+            //resultBoxes[boxIndex].GetComponent<Image>().color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
+            Debug.Log("Box Color Changed");
+            updateBox = false;
+            boxIndex++;
+            
+        }
+
         if (signElementsUI.Where(x => x.text == "?").Count() != 0)
             buttonsManager.ActivateSignButtons();
     }
@@ -124,7 +147,8 @@ public class ResultBoard : MonoBehaviour
     {
         Debug.Log("health--");
         health.healthValue--;
-        if (health.healthValue != 0) StartCoroutine(DamageFlicker());
+        if (health.healthValue != 0)
+            StartCoroutine(DamageFlicker());
     }
 
     private MatrixObject[] GetChosenMatrixObjects()
@@ -153,6 +177,7 @@ public class ResultBoard : MonoBehaviour
         }
 
         terms.Add(CalculateSimpleDiagonal(objects[0].value, objects[1].value));
+        updateBox = true;
         UpdateUI();
         buttonsManager.BLockMatrix();
         if (terms.Count == 2)

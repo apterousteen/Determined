@@ -8,7 +8,7 @@ TagManager:
   - Result
   - Sign Button
   - Result Button
-  - Flickering
+  - Result Box
   layers:
   - Default
   - TransparentFX

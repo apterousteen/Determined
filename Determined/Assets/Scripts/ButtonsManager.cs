@@ -11,6 +11,8 @@ public class ButtonsManager : MonoBehaviour
     private MatrixObject[] matrixObjects;
     private ResultBoard resultBoard;
 
+    public bool signPlus = true;
+
     private void Awake()
     {
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
@@ -26,6 +28,8 @@ public class ButtonsManager : MonoBehaviour
         uiELement.color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
         BlockSignButtons();
         ActivateMatrix();
+
+        signPlus = false;
     }
 
     public void SetPlusSign()
@@ -40,6 +44,8 @@ public class ButtonsManager : MonoBehaviour
         uiELement.color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
         BlockSignButtons();
         ActivateMatrix();
+
+        signPlus = true;
     }
 
     public void BlockSignButtons()
