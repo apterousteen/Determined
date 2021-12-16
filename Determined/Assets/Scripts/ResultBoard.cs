@@ -37,6 +37,16 @@ public class ResultBoard : MonoBehaviour
     public bool updateBox;
     public int boxIndex = 0;
 
+    private Dictionary<string, bool> triangleSequences = new Dictionary<string, bool>
+    {
+        ["DiagonalPositive"] = false,
+        ["UpperTrianglePositive"] = false,
+        ["BottomTrianglePositive"] = false,
+        ["DiagonalNegative"] = false,
+        ["UpperTriangleNegative"] = false,
+        ["BottomTriangleNegative"] = false
+    };
+
     IEnumerator DamageFlicker()
     {
         for (int i = 0; i < flickerAmnt; i++)
@@ -86,6 +96,7 @@ public class ResultBoard : MonoBehaviour
             MakeChosenMatrixObjectsActive(objects);
             if (objects.Length <= 1) return;
             if (typeOfResult == DeterminantType.DoubleMatrix) CalculateAnswerForDouble(objects);
+            if (typeOfResult == DeterminantType.Triangles) CalculateAnswerForTriangles(objects);
         }
     }
 
@@ -198,11 +209,107 @@ public class ResultBoard : MonoBehaviour
     {
         if (typeOfResult == DeterminantType.DoubleMatrix)
             GetResultForDoubleMatrix();
+        if (typeOfResult == DeterminantType.Triangles)
+            GetResultForTriangleMatrix();
     }
 
     private void GetResultForDoubleMatrix()
     {
         terms.Add(CalculateDoubleMatrixDeterminant());
+        UpdateUI();
+    }
+
+    private void CalculateAnswerForTriangles(MatrixObject[] objects)
+    {
+        if (objects.Count() == 3)
+        {
+            if (buttonsManager.signPlus)
+            {
+                if (objects.Any(a => a.x == 0 && a.y == 0) && objects.Any(a => a.x == 1 && a.y == 1) &&
+                    objects.Any(a => a.x == 2 && a.y == 2) && !triangleSequences["DiagonalPositive"])
+                {
+                    triangleSequences["DiagonalPositive"] = true;
+                    terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+                }
+                else if (objects.Any(a => a.x == 1 && a.y == 0) && objects.Any(a => a.x == 2 && a.y == 1) &&
+                         objects.Any(a => a.x == 0 && a.y == 2) && !triangleSequences["UpperTrianglePositive"])
+                {
+                    triangleSequences["UpperTrianglePositive"] = true;
+                    terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+                }
+                else if (objects.Any(a => a.x == 2 && a.y == 0) && objects.Any(a => a.x == 0 && a.y == 1) &&
+                         objects.Any(a => a.x == 1 && a.y == 2) && !triangleSequences["BottomTrianglePositive"])
+                {
+                    triangleSequences["BottomTrianglePositive"] = true;
+                    terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+                }
+                else
+                {
+                    LoseHealth();
+                    return;
+                }
+            }
+            else if (!buttonsManager.signPlus)
+            {
+                if (objects.Any(a => a.x == 2 && a.y == 0) && objects.Any(a => a.x == 1 && a.y == 1) &&
+                    objects.Any(a => a.x == 0 && a.y == 2) && !triangleSequences["DiagonalNegative"])
+                {
+                    triangleSequences["DiagonalNegative"] = true;
+                    terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+                }
+
+                else if (objects.Any(a => a.x == 1 && a.y == 0) && objects.Any(a => a.x == 0 && a.y == 1) &&
+                         objects.Any(a => a.x == 2 && a.y == 2) && !triangleSequences["UpperTriangleNegative"])
+                {
+                    triangleSequences["UpperTriangleNegative"] = true;
+                    terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+                }
+
+                else if (objects.Any(a => a.x == 2 && a.y == 1) && objects.Any(a => a.x == 1 && a.y == 2) &&
+                         objects.Any(a => a.x == 0 && a.y == 0) && !triangleSequences["BottomTriangleNegative"])
+                {
+                    triangleSequences["BottomTriangleNegative"] = true;
+                    terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+                }
+                else
+                {
+                    LoseHealth();
+                    return;
+                }
+            }
+        }
+        else
+        {
+            LoseHealth();
+            return;
+        }
+
+        if (terms.Count() == 3)
+        {
+            UpdateUI();
+            buttonsManager.BLockMatrix();
+        }
+
+        if (terms.Count == 6)
+            buttonsManager.ActivateResultButton();
+    }
+
+    private int CalculateTriangleOperations(int first, int second, int third)
+    {
+        if (!buttonsManager.signPlus)
+            return -1 * first * second * third;
+        else
+            return first * second * third;
+    }
+
+    private int CalculateTriangleDeterminant()
+    {
+        return terms.Sum();
+    }
+
+    private void GetResultForTriangleMatrix()
+    {
+        terms.Add(CalculateTriangleDeterminant());
         UpdateUI();
     }
 }
