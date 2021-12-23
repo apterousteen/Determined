@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading;
 using System;
+using System.Drawing;
 
 public class MenuController : MonoBehaviour
 {
@@ -17,16 +18,56 @@ public class MenuController : MonoBehaviour
     public string _newGameLevel;
     private string levelToLoad;
 
+    [Header("Popups")]
     [SerializeField] private GameObject exitPopup = null;
     [SerializeField] private GameObject creditsPopup = null;
     [SerializeField] private GameObject winPopup = null;
     [SerializeField] private GameObject failPopup = null;
+    [SerializeField] private GameObject pauseMenu = null;
+    [SerializeField] private GameObject hintPopup = null;
 
     [Header("Menus")]
     [SerializeField] private GameObject settingsMenu = null;
     [SerializeField] private GameObject lvlsMenu = null;
     [SerializeField] private GameObject mainMenu = null;
     public string mainMenuForLoad;
+
+    [Header("Hint Types")]
+    [SerializeField] private Sprite doubleMatrix = null;
+    [SerializeField] private Sprite triangle = null;
+    [SerializeField] private Sprite leibniz = null;
+
+    public ResultBoard resultBoard;
+
+    private void Awake()
+    {
+        resultBoard = FindObjectOfType<ResultBoard>();
+    }
+    public void ShowHint()
+    {
+        if (resultBoard.typeOfResult == DeterminantType.DoubleMatrix)
+            hintPopup.GetComponentInChildren<Image>().sprite = doubleMatrix;
+        else if (resultBoard.typeOfResult == DeterminantType.Triangles)
+            hintPopup.GetComponentInChildren<Image>().sprite = triangle;
+        else if (resultBoard.typeOfResult == DeterminantType.Leibniz)
+            hintPopup.GetComponentInChildren<Image>().sprite = leibniz;
+    }
+
+    public static bool GameIsPaused = false;
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
 
     public void StartNewGame()
     {
@@ -35,7 +76,7 @@ public class MenuController : MonoBehaviour
 
     public void LoadLevel()
     {
-        //SceneManager.LoadScene("Triple Matrix");
+        SceneManager.LoadScene("Triple Matrix");
     }
 
     public void GoBackToMenu()
@@ -89,8 +130,14 @@ public class MenuController : MonoBehaviour
     }
 
     public void OpenWinPopup()
-    {   //TO DO: waiting
-        winPopup.SetActive(true);
+    {
+        StartCoroutine(WaitAndShow(winPopup, 4.0f)); //4 secs
+    }
+
+    IEnumerator WaitAndShow(GameObject go, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        go.SetActive(true);
     }
 
     //TO DO: audio listener
