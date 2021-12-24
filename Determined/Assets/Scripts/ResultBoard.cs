@@ -36,6 +36,16 @@ public class ResultBoard : MonoBehaviour
 
     public bool updateBox;
     public int boxIndex = 0;
+    
+    private int xElementLocation;
+    private int yElementLocation;
+    private bool isXLineSelected = false;
+    private bool isYLineSelected = false;
+    private int coefficient = 0;
+    private int leibnizSupportPositive = 0;
+    private int leibnizSupportNegative = 0;
+    private int leibnizSupportCount = 0;
+    private List<(int, int)> usedAlgebraicComplements = new List<(int, int)>();
 
     private Dictionary<string, bool> triangleSequences = new Dictionary<string, bool>
     {
@@ -97,6 +107,9 @@ public class ResultBoard : MonoBehaviour
             if (objects.Length <= 1) return;
             if (typeOfResult == DeterminantType.DoubleMatrix) CalculateAnswerForDouble(objects);
             if (typeOfResult == DeterminantType.Triangles) CalculateAnswerForTriangles(objects);
+            if (typeOfResult == DeterminantType.Leibniz &&
+                matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).Count() == 5) CalculateAnswerForLeibnizForDouble(objects);
+            else if (typeOfResult == DeterminantType.Leibniz) CalculateAnswerForLeibniz(objects);
         }
     }
 
@@ -110,6 +123,12 @@ public class ResultBoard : MonoBehaviour
     {
         foreach (var matrixObject in objects)
             matrixObject.BlockMatrixObject();
+    }
+    
+    private void MakeBlockedMatrixObjectsActive()
+    {
+        foreach (var matrixObject in matrixObjects)
+            matrixObject.MakeMatrixObjectActive();
     }
 
     private void UpdateForLeibniz()
@@ -211,6 +230,8 @@ public class ResultBoard : MonoBehaviour
             GetResultForDoubleMatrix();
         if (typeOfResult == DeterminantType.Triangles)
             GetResultForTriangleMatrix();
+        if (typeOfResult == DeterminantType.Leibniz)
+            GetResultForLeibnizMatrix();
     }
 
     private void GetResultForDoubleMatrix()
@@ -311,5 +332,176 @@ public class ResultBoard : MonoBehaviour
     {
         terms.Add(CalculateTriangleDeterminant());
         UpdateUI();
+    }
+    
+    private void CalculateAnswerForLeibniz(MatrixObject[] objects)
+    {
+        int tempX = 0, tempY = 0;
+        int tempXMax = 0, tempYMax = 0;
+        int xMaxPos = 0, yMaxPos = 0;
+
+        if (objects.Count() == 3)
+        {
+            if (objects.All(a => a.x == objects[0].x) && !isXLineSelected)
+            {
+                xElementLocation = objects[0].x;
+                isXLineSelected = true;
+                MakeChosenMatrixObjectsBlocked(objects);
+            }
+            else if (objects.All(a => a.y == objects[0].y) && !isYLineSelected)
+            {
+                yElementLocation = objects[0].y;
+                isYLineSelected = true;
+                MakeChosenMatrixObjectsBlocked(objects);
+            }
+            else
+            {
+                LoseHealth();
+                return;
+            }
+        }
+        else if (objects.Count() == 2 && isXLineSelected && !isYLineSelected)
+        {
+            if (objects.All(a => a.y == objects[0].y))
+            {
+                yElementLocation = objects[0].y;
+                var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
+                isYLineSelected = true;
+                coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                MakeChosenMatrixObjectsBlocked(objects);
+            }
+            else
+            {
+                LoseHealth();
+                return;
+            }
+        }
+        else if (objects.Count() == 2 && isYLineSelected && !isXLineSelected)
+        {
+            if (objects.All(a => a.x == objects[0].x))
+            {
+                xElementLocation = objects[0].x;
+                var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
+                isXLineSelected = true;
+                coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                MakeChosenMatrixObjectsBlocked(objects);
+            }
+            else
+            {
+                LoseHealth();
+                return;
+            }
+        }
+        else if (objects.Count() == 5)
+        {
+            foreach (var e in objects)
+            {
+                tempX = objects.Where(a => a.x == e.x).Count();
+                tempY = objects.Where(a => a.y == e.y).Count();
+                if (tempX > tempXMax)
+                {
+                    tempXMax = tempX;
+                    xMaxPos = e.x;
+                }
+                if (tempY > tempYMax)
+                {
+                    tempYMax = tempY;
+                    yMaxPos = e.y;
+                }
+            }
+
+            if (tempXMax == 3 && tempYMax == 3)
+            {
+                var cornerValue = objects.First(a => a.x == xMaxPos && a.y == yMaxPos);
+                xElementLocation = xMaxPos;
+                yElementLocation = yMaxPos;
+                if (usedAlgebraicComplements.Count() != 0 && usedAlgebraicComplements.Any(a => a.Item1 == xElementLocation && a.Item2 == yElementLocation))
+                {
+                    LoseHealth();
+                    return;
+                }
+                else
+                {
+                    coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                    MakeChosenMatrixObjectsBlocked(objects);
+                }
+            }
+            else
+            {
+                LoseHealth();
+                return;
+            }
+        }
+        else
+        {
+            LoseHealth();
+            return;
+        }
+    }
+
+    private void CalculateAnswerForLeibnizForDouble(MatrixObject[] objects)
+    {
+        if (objects.Count() == 2)
+        {
+            if (objects[0].x != objects[1].x && objects[0].y != objects[1].y)
+            {
+                if (leibnizSupportCount == 0)
+                {
+                    leibnizSupportPositive = CalculateSimpleDiagonal(objects[0].value, objects[1].value);
+                    leibnizSupportCount++;
+
+                }
+                else if (leibnizSupportCount == 1)
+                {
+                    leibnizSupportNegative = CalculateSimpleDiagonal(objects[0].value, objects[1].value);
+                    leibnizSupportCount++;
+                }
+
+                if (leibnizSupportCount == 2)
+                {
+                    leibnizSupportCount = 0;
+                    terms.Add(coefficient * (leibnizSupportPositive - leibnizSupportNegative));
+                    usedAlgebraicComplements.Add((xElementLocation, yElementLocation));
+                    isXLineSelected = false;
+                    isYLineSelected = false;
+
+                    if (terms.Count() == 3)
+                    {
+                        MakeBlockedMatrixObjectsActive();
+                        Debug.Log(CalculateLeibnizDeterminant()); //Debug result
+                        buttonsManager.ActivateResultButton(); //Null Reference Exception
+                    }
+                    else if (terms.Count() != 3)
+                    {
+                        MakeBlockedMatrixObjectsActive();
+                        updateBox = true;
+                        UpdateUI(); //Null Reference Exception
+                        buttonsManager.ActivateSignButtons();
+                        buttonsManager.BLockMatrix();
+                    }
+                }
+            }
+            else
+            {
+                LoseHealth();
+                return;
+            }
+        }
+        else
+        {
+            LoseHealth();
+            return;
+        }
+    }
+
+    private int CalculateLeibnizDeterminant()
+    {
+        return terms.Sum();
+    }
+
+    private void GetResultForLeibnizMatrix()
+    {
+        terms.Add(CalculateLeibnizDeterminant());
+        UpdateUI(); //Null Reference Exception
     }
 }
