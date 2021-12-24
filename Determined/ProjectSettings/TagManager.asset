@@ -9,6 +9,7 @@ TagManager:
   - Sign Button
   - Result Button
   - Result Box
+  - Sign
   layers:
   - Default
   - TransparentFX

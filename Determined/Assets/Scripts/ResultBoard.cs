@@ -17,7 +17,7 @@ public enum DeterminantType
 
 public class ResultBoard : MonoBehaviour
 {
-    private List<int> terms;
+    public List<int> terms;
     public List<TMP_Text> resultElementsUI;
     private List<TMP_Text> signElementsUI;
     public List<GameObject> resultBoxes;
@@ -36,7 +36,9 @@ public class ResultBoard : MonoBehaviour
 
     public bool updateBox;
     public int boxIndex = 0;
-    
+    private bool twoTermsCalculated = false;
+    public bool levelWasWon = false;
+
     private int xElementLocation;
     private int yElementLocation;
     private bool isXLineSelected = false;
@@ -77,26 +79,26 @@ public class ResultBoard : MonoBehaviour
         resultBoxes = FindObjectsOfType<GameObject>().Where(x => x.gameObject.tag == "Result Box").OrderBy(x => x.gameObject.name).ToList();
         matrixObjects = FindObjectsOfType<MatrixObject>();
         buttonsManager = GetComponent<ButtonsManager>();
-        SetMatrixObjectsHiddenPositions();
+        //SetMatrixObjectsHiddenPositions();
     }
 
-    private void SetMatrixObjectsHiddenPositions()
-    {
-        var matrixObjectsByX = matrixObjects.OrderBy(x => x.gameObject.GetComponent<Transform>().position.x);
-        int counter = 0;
-        foreach(var matrixObject in matrixObjectsByX)
-        {
-            counter++;
-            matrixObject.x = counter / 3;
-        }
-        var matrixObjectsByY = matrixObjects.OrderByDescending(x => x.gameObject.GetComponent<Transform>().position.y);
-        counter = 0;
-        foreach (var matrixObject in matrixObjectsByY)
-        {
-            counter++;
-            matrixObject.y = counter / 3;
-        }
-    }
+    //private void SetMatrixObjectsHiddenPositions()
+    //{
+    //    var matrixObjectsByX = matrixObjects.OrderBy(x => x.gameObject.GetComponent<Transform>().position.x);
+    //    int counter = 0;
+    //    foreach(var matrixObject in matrixObjectsByX)
+    //    {
+    //        counter++;
+    //        matrixObject.x = counter / 3;
+    //    }
+    //    var matrixObjectsByY = matrixObjects.OrderByDescending(x => x.gameObject.GetComponent<Transform>().position.y);
+    //    counter = 0;
+    //    foreach (var matrixObject in matrixObjectsByY)
+    //    {
+    //        counter++;
+    //        matrixObject.y = counter / 3;
+    //    }
+    //}
 
     private void Update()
     {
@@ -131,17 +133,6 @@ public class ResultBoard : MonoBehaviour
             matrixObject.MakeMatrixObjectActive();
     }
 
-    private void UpdateForLeibniz()
-    {
-        var objects = GetChosenMatrixObjects();
-        if (objects.Length == 0) return;
-        if (matrixObjects.Where(x => x.currentState == MatrixObjectState.Blocked).Count() == 0)
-        {
-            CheckForBlockingMatrixObjects(objects);
-            return;
-        }
-    }
-
     private bool CheckForBlockingMatrixObjects(MatrixObject[] objects)
     {
         if (objects.Length != 5) return false;
@@ -169,7 +160,8 @@ public class ResultBoard : MonoBehaviour
             
         }
 
-        if (signElementsUI.Where(x => x.text == "?").Count() != 0)
+        if (signElementsUI.Where(x => x.text == "?").Count() != 0 &&
+            (typeOfResult != DeterminantType.Leibniz || twoTermsCalculated))
             buttonsManager.ActivateSignButtons();
     }
 
@@ -236,6 +228,7 @@ public class ResultBoard : MonoBehaviour
 
     private void GetResultForDoubleMatrix()
     {
+        levelWasWon = true;
         terms.Add(CalculateDoubleMatrixDeterminant());
         UpdateUI();
     }
@@ -304,12 +297,9 @@ public class ResultBoard : MonoBehaviour
             LoseHealth();
             return;
         }
-
-        if (terms.Count() == 3)
-        {
-            UpdateUI();
-            buttonsManager.BLockMatrix();
-        }
+        updateBox = true;
+        UpdateUI();
+        buttonsManager.BLockMatrix();
 
         if (terms.Count == 6)
             buttonsManager.ActivateResultButton();
@@ -325,6 +315,7 @@ public class ResultBoard : MonoBehaviour
 
     private int CalculateTriangleDeterminant()
     {
+        levelWasWon = true;
         return terms.Sum();
     }
 
@@ -340,6 +331,7 @@ public class ResultBoard : MonoBehaviour
         int tempXMax = 0, tempYMax = 0;
         int xMaxPos = 0, yMaxPos = 0;
 
+        twoTermsCalculated = false;
         if (objects.Count() == 3)
         {
             if (objects.All(a => a.x == objects[0].x) && !isXLineSelected)
@@ -368,6 +360,8 @@ public class ResultBoard : MonoBehaviour
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isYLineSelected = true;
                 coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                terms.Add(coefficient);
+                updateBox = true;
                 MakeChosenMatrixObjectsBlocked(objects);
             }
             else
@@ -384,6 +378,8 @@ public class ResultBoard : MonoBehaviour
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isXLineSelected = true;
                 coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                terms.Add(coefficient);
+                updateBox = true;
                 MakeChosenMatrixObjectsBlocked(objects);
             }
             else
@@ -423,6 +419,8 @@ public class ResultBoard : MonoBehaviour
                 else
                 {
                     coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                    updateBox = true;
+                    terms.Add(coefficient);
                     MakeChosenMatrixObjectsBlocked(objects);
                 }
             }
@@ -437,6 +435,7 @@ public class ResultBoard : MonoBehaviour
             LoseHealth();
             return;
         }
+        UpdateUI();
     }
 
     private void CalculateAnswerForLeibnizForDouble(MatrixObject[] objects)
@@ -460,22 +459,23 @@ public class ResultBoard : MonoBehaviour
                 if (leibnizSupportCount == 2)
                 {
                     leibnizSupportCount = 0;
-                    terms.Add(coefficient * (leibnizSupportPositive - leibnizSupportNegative));
+                    terms.Add(/*coefficient **/ (leibnizSupportPositive - leibnizSupportNegative));
+                    twoTermsCalculated = true;
                     usedAlgebraicComplements.Add((xElementLocation, yElementLocation));
                     isXLineSelected = false;
                     isYLineSelected = false;
+                    
+                    updateBox = true;
+                    UpdateUI();
 
-                    if (terms.Count() == 3)
+                    if (terms.Count() == 6)
                     {
                         MakeBlockedMatrixObjectsActive();
-                        Debug.Log(CalculateLeibnizDeterminant()); //Debug result
                         buttonsManager.ActivateResultButton(); //Null Reference Exception
                     }
-                    else if (terms.Count() != 3)
+                    else if (terms.Count() != 6)
                     {
                         MakeBlockedMatrixObjectsActive();
-                        updateBox = true;
-                        UpdateUI(); //Null Reference Exception
                         buttonsManager.ActivateSignButtons();
                         buttonsManager.BLockMatrix();
                     }
@@ -496,12 +496,38 @@ public class ResultBoard : MonoBehaviour
 
     private int CalculateLeibnizDeterminant()
     {
+        levelWasWon = true;
         return terms.Sum();
     }
 
     private void GetResultForLeibnizMatrix()
     {
-        terms.Add(CalculateLeibnizDeterminant());
+        var secondPanel = this.gameObject.transform.Find("Second Panel").gameObject;
+        if (secondPanel.activeSelf)
+            terms.Add(CalculateLeibnizDeterminant());
+        else
+        {
+            var temp = new List<int>();
+            for (int i = 0; i < terms.Count(); i += 2)
+                temp.Add(terms[i] * terms[i + 1]);
+            terms = temp;
+            var signs = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Sign").OrderBy(x => x.gameObject.name).ToList();
+            this.gameObject.transform.Find("First Panel").gameObject.SetActive(false);
+            secondPanel.SetActive(true);
+            var newSigns = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Sign").OrderBy(x => x.gameObject.name).ToList();
+            resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
+            for (int i = 0; i < signs.Count; i++)
+                newSigns[i].text = signs[i].text;
+            resultBoxes = FindObjectsOfType<GameObject>().Where(x => x.gameObject.tag == "Result Box").OrderBy(x => x.gameObject.name).ToList();
+            for (int i = 0; i < resultBoxes.Count; i++)
+                if (i == 0)
+                    resultBoxes[i].GetComponent<Image>().color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
+                else if (newSigns[i - 1].text == "+")
+                    resultBoxes[i].GetComponent<Image>().color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
+                else
+                    resultBoxes[i].GetComponent<Image>().color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
+
+        }
         UpdateUI(); //Null Reference Exception
     }
 }

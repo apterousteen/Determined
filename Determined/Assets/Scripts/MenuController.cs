@@ -39,6 +39,7 @@ public class MenuController : MonoBehaviour
 
     public ResultBoard resultBoard;
 
+
     private void Awake()
     {
         resultBoard = FindObjectOfType<ResultBoard>();
@@ -131,7 +132,8 @@ public class MenuController : MonoBehaviour
 
     public void OpenWinPopup()
     {
-        StartCoroutine(WaitAndShow(winPopup, 4.0f)); //4 secs
+        if(resultBoard.levelWasWon)
+            StartCoroutine(WaitAndShow(winPopup, 4.0f)); //4 secs
     }
 
     IEnumerator WaitAndShow(GameObject go, float delay)
