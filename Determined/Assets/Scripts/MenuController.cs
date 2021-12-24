@@ -75,9 +75,14 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(_newGameLevel);
     }
 
-    public void LoadLevel()
+    public void LoadLevel2()
     {
-        SceneManager.LoadScene("Triple Matrix");
+        SceneManager.LoadScene("Leibniz Formula");
+    }
+
+    public void LoadLevel3()
+    {
+        SceneManager.LoadScene("Triangles");
     }
 
     public void GoBackToMenu()
@@ -133,7 +138,7 @@ public class MenuController : MonoBehaviour
     public void OpenWinPopup()
     {
         if(resultBoard.levelWasWon)
-            StartCoroutine(WaitAndShow(winPopup, 4.0f)); //4 secs
+            StartCoroutine(WaitAndShow(winPopup, 2.0f)); //4 secs
     }
 
     IEnumerator WaitAndShow(GameObject go, float delay)

@@ -2019,6 +2019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ff7f105e40b6d4d88f8a5c9f69ec37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terms: 
   resultElementsUI: []
   resultBoxes: []
   matrixObjects: []
@@ -2029,6 +2030,7 @@ MonoBehaviour:
   flickerAmnt: 3
   updateBox: 0
   boxIndex: 0
+  levelWasWon: 0
 --- !u!114 &371766316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3200,7 +3202,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1, y: 1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5135,7 +5137,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1225160466}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: LoadLevel
+        m_MethodName: LoadLevel2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

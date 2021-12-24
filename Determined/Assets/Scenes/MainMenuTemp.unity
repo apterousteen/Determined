@@ -190,10 +190,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: aa35c2792811b644fb9774b75b500eff, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: aa35c2792811b644fb9774b75b500eff, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: aa35c2792811b644fb9774b75b500eff, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 3aed026fed38b1f438364ffdcfbec928, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 3aed026fed38b1f438364ffdcfbec928, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 3aed026fed38b1f438364ffdcfbec928, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 3aed026fed38b1f438364ffdcfbec928, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -204,7 +204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 750635430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1415409351}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: LoadLevel3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &35532761
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1779,7 +1791,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1415409351}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: LoadLevel
+        m_MethodName: LoadLevel2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2493,7 +2505,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 486848f3bfd1e5e4983fca619732c887, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60016845ab03aa2489abd0f399d3ce9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
