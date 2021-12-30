@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 using System.Threading;
 using System;
 using System.Drawing;
@@ -137,8 +138,11 @@ public class MenuController : MonoBehaviour
 
     public void OpenWinPopup()
     {
-        if(resultBoard.levelWasWon)
-            StartCoroutine(WaitAndShow(winPopup, 2.0f)); //4 secs
+        if (resultBoard.levelWasWon)
+        {
+            FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Result Button").First().enabled = false;
+            StartCoroutine(WaitAndShow(winPopup, 2.0f));
+        }//4 secs
     }
 
     IEnumerator WaitAndShow(GameObject go, float delay)

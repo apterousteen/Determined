@@ -316,7 +316,16 @@ public class ResultBoard : MonoBehaviour
     private int CalculateTriangleDeterminant()
     {
         levelWasWon = true;
-        return terms.Sum();
+        var sum = terms[0];
+        var signs = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Sign").OrderBy(x => x.gameObject.name).ToList();
+        for (int i = 0; i < signs.Count; i++)
+        {
+            var modificator = 1;
+            if (signs[i].text == "-")
+                modificator = -1;
+            sum += terms[i + 1] * modificator;
+        }
+        return sum;
     }
 
     private void GetResultForTriangleMatrix()
@@ -359,7 +368,7 @@ public class ResultBoard : MonoBehaviour
                 yElementLocation = objects[0].y;
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isYLineSelected = true;
-                coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                coefficient = cornerValue.value;
                 terms.Add(coefficient);
                 updateBox = true;
                 MakeChosenMatrixObjectsBlocked(objects);
@@ -377,7 +386,7 @@ public class ResultBoard : MonoBehaviour
                 xElementLocation = objects[0].x;
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isXLineSelected = true;
-                coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                coefficient = cornerValue.value;
                 terms.Add(coefficient);
                 updateBox = true;
                 MakeChosenMatrixObjectsBlocked(objects);
@@ -418,7 +427,7 @@ public class ResultBoard : MonoBehaviour
                 }
                 else
                 {
-                    coefficient = (int)Math.Pow(-1, xElementLocation + yElementLocation) * cornerValue.value;
+                    coefficient = cornerValue.value;
                     updateBox = true;
                     terms.Add(coefficient);
                     MakeChosenMatrixObjectsBlocked(objects);
@@ -444,16 +453,20 @@ public class ResultBoard : MonoBehaviour
         {
             if (objects[0].x != objects[1].x && objects[0].y != objects[1].y)
             {
-                if (leibnizSupportCount == 0)
+                if (leibnizSupportCount < 2)
                 {
-                    leibnizSupportPositive = CalculateSimpleDiagonal(objects[0].value, objects[1].value);
-                    leibnizSupportCount++;
+                    objects = objects.OrderBy(that => that.y).ToArray();
+                    if(objects[0].x < objects[1].x)
+                    {
+                        leibnizSupportPositive = CalculateSimpleDiagonal(objects[0].value, objects[1].value);
+                        leibnizSupportCount++;
 
-                }
-                else if (leibnizSupportCount == 1)
-                {
-                    leibnizSupportNegative = CalculateSimpleDiagonal(objects[0].value, objects[1].value);
-                    leibnizSupportCount++;
+                    }
+                    else
+                    {
+                        leibnizSupportNegative = CalculateSimpleDiagonal(objects[0].value, objects[1].value);
+                        leibnizSupportCount++;
+                    }
                 }
 
                 if (leibnizSupportCount == 2)
@@ -497,7 +510,16 @@ public class ResultBoard : MonoBehaviour
     private int CalculateLeibnizDeterminant()
     {
         levelWasWon = true;
-        return terms.Sum();
+        var sum = terms[0];
+        var signs = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Sign").OrderBy(x => x.gameObject.name).ToList();
+        for (int i = 0; i < signs.Count; i++)
+        {
+            var modificator = 1;
+            if (signs[i].text == "-")
+                modificator = -1;
+            sum += terms[i + 1] * modificator;
+        }
+        return sum;
     }
 
     private void GetResultForLeibnizMatrix()
