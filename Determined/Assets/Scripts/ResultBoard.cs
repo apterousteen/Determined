@@ -34,6 +34,14 @@ public class ResultBoard : MonoBehaviour
     public float flickerDuration;
     public float flickerAmnt;
 
+    [Header("Corner Triangles")]
+    [SerializeField] private Sprite DiagonalPositive = null;
+    [SerializeField] private Sprite DiagonalNegative = null;
+    [SerializeField] private Sprite UpperTrianglePositive = null;
+    [SerializeField] private Sprite BottomTrianglePositive = null;
+    [SerializeField] private Sprite UpperTriangleNegative = null;
+    [SerializeField] private Sprite BottomTriangleNegative = null;
+
     public bool updateBox;
     public int boxIndex = 0;
     private bool twoTermsCalculated = false;
@@ -49,7 +57,9 @@ public class ResultBoard : MonoBehaviour
     private int leibnizSupportCount = 0;
     private List<(int, int)> usedAlgebraicComplements = new List<(int, int)>();
 
-    private Dictionary<string, bool> triangleSequences = new Dictionary<string, bool>
+    private string cornerTriangleName;
+
+    public Dictionary<string, bool> triangleSequences = new Dictionary<string, bool>
     {
         ["DiagonalPositive"] = false,
         ["UpperTrianglePositive"] = false,
@@ -153,8 +163,42 @@ public class ResultBoard : MonoBehaviour
             else 
                 resultBoxes[boxIndex].GetComponent<Image>().color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
 
-            //resultBoxes[boxIndex].GetComponent<Image>().color = new Color(0.9333334f, 0.5490196f, 0.5490196f, 1);
             Debug.Log("Box Color Changed");
+
+            if (cornerTriangleName == "DiagonalPositive")
+            {
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().sprite = DiagonalPositive;
+            }
+            else if (cornerTriangleName == "DiagonalNegative")
+            {
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().sprite = DiagonalNegative;
+            }
+            else if (cornerTriangleName == "UpperTrianglePositive")
+            {
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().sprite = UpperTrianglePositive;
+            }
+
+            else if (cornerTriangleName == "UpperTriangleNegative")
+            {
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().sprite = UpperTriangleNegative;
+            }
+
+            else if (cornerTriangleName == "BottomTrianglePositive")
+            {
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().sprite = BottomTrianglePositive;
+            }
+
+            else if (cornerTriangleName == "BottomTriangleNegative")
+            {
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                resultBoxes[boxIndex].transform.GetChild(1).GetComponent<Image>().sprite = BottomTriangleNegative;
+            }
+
             updateBox = false;
             boxIndex++;
             
@@ -244,18 +288,24 @@ public class ResultBoard : MonoBehaviour
                 {
                     triangleSequences["DiagonalPositive"] = true;
                     terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+
+                    cornerTriangleName = triangleSequences.Keys.First();
                 }
                 else if (objects.Any(a => a.x == 1 && a.y == 0) && objects.Any(a => a.x == 2 && a.y == 1) &&
                          objects.Any(a => a.x == 0 && a.y == 2) && !triangleSequences["UpperTrianglePositive"])
                 {
                     triangleSequences["UpperTrianglePositive"] = true;
                     terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+
+                    cornerTriangleName = triangleSequences.ElementAt(1).Key;
                 }
                 else if (objects.Any(a => a.x == 2 && a.y == 0) && objects.Any(a => a.x == 0 && a.y == 1) &&
                          objects.Any(a => a.x == 1 && a.y == 2) && !triangleSequences["BottomTrianglePositive"])
                 {
                     triangleSequences["BottomTrianglePositive"] = true;
                     terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+
+                    cornerTriangleName = triangleSequences.ElementAt(2).Key;
                 }
                 else
                 {
@@ -270,6 +320,8 @@ public class ResultBoard : MonoBehaviour
                 {
                     triangleSequences["DiagonalNegative"] = true;
                     terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+
+                    cornerTriangleName = triangleSequences.ElementAt(3).Key;
                 }
 
                 else if (objects.Any(a => a.x == 1 && a.y == 0) && objects.Any(a => a.x == 0 && a.y == 1) &&
@@ -277,6 +329,8 @@ public class ResultBoard : MonoBehaviour
                 {
                     triangleSequences["UpperTriangleNegative"] = true;
                     terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+
+                    cornerTriangleName = triangleSequences.ElementAt(4).Key;
                 }
 
                 else if (objects.Any(a => a.x == 2 && a.y == 1) && objects.Any(a => a.x == 1 && a.y == 2) &&
@@ -284,6 +338,8 @@ public class ResultBoard : MonoBehaviour
                 {
                     triangleSequences["BottomTriangleNegative"] = true;
                     terms.Add(CalculateTriangleOperations(objects[0].value, objects[1].value, objects[2].value));
+
+                    cornerTriangleName = triangleSequences.ElementAt(5).Key;
                 }
                 else
                 {

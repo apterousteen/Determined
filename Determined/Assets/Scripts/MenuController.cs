@@ -45,6 +45,7 @@ public class MenuController : MonoBehaviour
     {
         resultBoard = FindObjectOfType<ResultBoard>();
     }
+
     public void ShowHint()
     {
         if (resultBoard.typeOfResult == DeterminantType.DoubleMatrix)
