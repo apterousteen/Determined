@@ -17,14 +17,18 @@ public enum DeterminantType
 
 public class ResultBoard : MonoBehaviour
 {
+    public bool ColoredLevel;
+    public List<Image> coloredAnswers;
+
     public List<int> terms;
     public List<TMP_Text> resultElementsUI;
     private List<TMP_Text> signElementsUI;
     public List<GameObject> resultBoxes;
     public MatrixObject[] matrixObjects;
     private ButtonsManager buttonsManager;
+    private SimplerLineController lineController;
 
-    //public MatrixObject[] objects;
+    
     public DeterminantType typeOfResult;
 
     public Health health;
@@ -83,32 +87,18 @@ public class ResultBoard : MonoBehaviour
     private void Awake()
     {
         terms = new List<int>();
-        resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
+        if(ColoredLevel)
+        {
+            coloredAnswers = FindObjectsOfType<Image>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
+        }
+        else resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
         //
         resultBoxes = FindObjectsOfType<GameObject>().Where(x => x.gameObject.tag == "Result Box").OrderBy(x => x.gameObject.name).ToList();
         matrixObjects = FindObjectsOfType<MatrixObject>();
         buttonsManager = GetComponent<ButtonsManager>();
-        //SetMatrixObjectsHiddenPositions();
+        lineController = FindObjectOfType<SimplerLineController>();
     }
-
-    //private void SetMatrixObjectsHiddenPositions()
-    //{
-    //    var matrixObjectsByX = matrixObjects.OrderBy(x => x.gameObject.GetComponent<Transform>().position.x);
-    //    int counter = 0;
-    //    foreach(var matrixObject in matrixObjectsByX)
-    //    {
-    //        counter++;
-    //        matrixObject.x = counter / 3;
-    //    }
-    //    var matrixObjectsByY = matrixObjects.OrderByDescending(x => x.gameObject.GetComponent<Transform>().position.y);
-    //    counter = 0;
-    //    foreach (var matrixObject in matrixObjectsByY)
-    //    {
-    //        counter++;
-    //        matrixObject.y = counter / 3;
-    //    }
-    //}
 
     private void Update()
     {
@@ -149,11 +139,20 @@ public class ResultBoard : MonoBehaviour
         return true;
     }
 
+    private void ShowAnswer(int i)
+    {
+        if (ColoredLevel)
+        {
+            coloredAnswers[i].color = new Color(255, 255, 255, 100);
+        }
+        else resultElementsUI[i].text = terms[i].ToString();
+    }
+
     private void UpdateUI()
     {
         for (int i = 0; i < terms.Count; i++) 
-        { 
-            resultElementsUI[i].text = terms[i].ToString();
+        {
+            ShowAnswer(i);
         }
 
         if (updateBox)
@@ -403,12 +402,14 @@ public class ResultBoard : MonoBehaviour
             {
                 xElementLocation = objects[0].x;
                 isXLineSelected = true;
+                lineController.AddPoints(objects);
                 MakeChosenMatrixObjectsBlocked(objects);
             }
             else if (objects.All(a => a.y == objects[0].y) && !isYLineSelected)
             {
                 yElementLocation = objects[0].y;
                 isYLineSelected = true;
+                lineController.AddPoints(objects);
                 MakeChosenMatrixObjectsBlocked(objects);
             }
             else
@@ -424,6 +425,7 @@ public class ResultBoard : MonoBehaviour
                 yElementLocation = objects[0].y;
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isYLineSelected = true;
+                lineController.AddPoints(objects, cornerValue);
                 coefficient = cornerValue.value;
                 terms.Add(coefficient);
                 updateBox = true;
@@ -442,6 +444,7 @@ public class ResultBoard : MonoBehaviour
                 xElementLocation = objects[0].x;
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isXLineSelected = true;
+                lineController.AddPoints(objects, cornerValue);
                 coefficient = cornerValue.value;
                 terms.Add(coefficient);
                 updateBox = true;
@@ -486,6 +489,7 @@ public class ResultBoard : MonoBehaviour
                     coefficient = cornerValue.value;
                     updateBox = true;
                     terms.Add(coefficient);
+                    lineController.AddPoints(objects, cornerValue);
                     MakeChosenMatrixObjectsBlocked(objects);
                 }
             }
@@ -528,13 +532,14 @@ public class ResultBoard : MonoBehaviour
                 if (leibnizSupportCount == 2)
                 {
                     leibnizSupportCount = 0;
-                    terms.Add(/*coefficient **/ (leibnizSupportPositive - leibnizSupportNegative));
+                    terms.Add((leibnizSupportPositive - leibnizSupportNegative));
                     twoTermsCalculated = true;
                     usedAlgebraicComplements.Add((xElementLocation, yElementLocation));
                     isXLineSelected = false;
                     isYLineSelected = false;
                     
                     updateBox = true;
+                    lineController.ClearLines();
                     UpdateUI();
 
                     if (terms.Count() == 6)
