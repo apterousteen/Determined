@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public enum MatrixObjectState
 {
@@ -12,10 +11,6 @@ public enum MatrixObjectState
 
 public abstract class MatrixObject : MonoBehaviour
 {
-    [SerializeField] Sprite chosenMatrixObject = null;
-    [SerializeField] Sprite activeMatrixObject = null;
-    [SerializeField] Sprite blockedMatrixObject = null;
-
     public MatrixObjectState currentState = MatrixObjectState.Active;
     public int value;
     protected LineController lineController;
@@ -40,20 +35,17 @@ public abstract class MatrixObject : MonoBehaviour
     {
         currentState = MatrixObjectState.Chosen;
         lineController.AddPoint(gameObject.transform);
-        gameObject.GetComponent<SpriteRenderer>().sprite = chosenMatrixObject;
     }
 
     public virtual void MakeMatrixObjectActive()
     {
         currentState = MatrixObjectState.Active;
         lineController.DeletePoint(gameObject.transform);
-        gameObject.GetComponent<SpriteRenderer>().sprite = activeMatrixObject;
     }
 
     public virtual void BlockMatrixObject()
     {
         currentState = MatrixObjectState.Blocked;
-        gameObject.GetComponent<SpriteRenderer>().sprite = blockedMatrixObject;
     }
 
     public void OnMouseEnter()
@@ -94,9 +86,9 @@ public abstract class MatrixObject : MonoBehaviour
     {
         if (currentState != MatrixObjectState.Blocked)
         {
-            if(lineController.points.Last() == gameObject.transform.position) 
-                MakeMatrixObjectActive();
-            else ChooseMatrixObject();
+            if (currentState == MatrixObjectState.Active)
+                ChooseMatrixObject();
+            else MakeMatrixObjectActive();
         }
     }
 
