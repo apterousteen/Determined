@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Slider volumeSlider = null;
     [SerializeField] private float defaultVolume = 0.5f;
     [SerializeField] private float vol;
+    AudioManager audioManager;
 
     [Header("Levels")]
     public string _newGameLevel;
@@ -42,6 +43,8 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         resultBoard = FindObjectOfType<ResultBoard>();
+        audioManager = FindObjectOfType<AudioManager>();
+        SetVolume(defaultVolume);
     }
 
     public void ShowHint()
@@ -75,9 +78,20 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(_newGameLevel);
     }
 
+<<<<<<< Updated upstream
     public void SelectLevel (string levelName)
     {
         SceneManager.LoadScene(levelName);
+=======
+    public void LoadLevel(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+>>>>>>> Stashed changes
     }
 
     public void GoBackToMenu()
@@ -127,6 +141,32 @@ public class MenuController : MonoBehaviour
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
         vol = AudioListener.volume;
+    }
+
+    public void ControlAudio()
+    {
+        if (audioManager.muted)
+        {
+            Unmute();
+            audioManager.muted = false;
+        }
+        else
+        {
+            Mute();
+            audioManager.muted = true;
+        }
+    }
+
+    private void Mute()
+    {
+        AudioListener.volume = 0;
+        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
+    }
+
+    private void Unmute()
+    {
+        AudioListener.volume = vol;
+        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
     }
 
     public void OpenWinPopup()
