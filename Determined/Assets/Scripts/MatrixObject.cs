@@ -20,6 +20,7 @@ public abstract class MatrixObject : MonoBehaviour
     public int value;
     protected LineController lineController;
     protected BoxCollider2D boxCollider;
+    private AudioManager audioManager;
     protected bool fingerInCollider = false;
 
     public int x;
@@ -29,6 +30,7 @@ public abstract class MatrixObject : MonoBehaviour
     {
         lineController = FindObjectOfType<LineController>();
         boxCollider = GetComponent<BoxCollider2D>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     protected void Update()
@@ -96,13 +98,20 @@ public abstract class MatrixObject : MonoBehaviour
         {
             if(lineController.points.Last() == gameObject.transform.position) 
                 MakeMatrixObjectActive();
-            else ChooseMatrixObject();
+            else
+            {
+                ChooseMatrixObject();
+                audioManager.Play("MatrixObjectChained");
+            }
         }
     }
 
     protected void PointerDown()
     {
         if (currentState != MatrixObjectState.Blocked)
+        {
             ChooseMatrixObject();
+            audioManager.Play("MatrixObjectClicked");
+        }
     }
 }
