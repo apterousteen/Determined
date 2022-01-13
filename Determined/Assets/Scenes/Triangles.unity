@@ -3639,9 +3639,15 @@ MonoBehaviour:
   activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
+<<<<<<< Updated upstream
+  value: 6
+  x: 1
+  y: 2
+=======
   value: 1
   x: 2
   y: 1
+>>>>>>> Stashed changes
   matrixText: []
 --- !u!212 &825833302
 SpriteRenderer:
@@ -4249,6 +4255,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 959735578}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
+=======
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -4357,6 +4365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 857248711}
   m_Enabled: 1
   m_EditorHideFlags: 0
+>>>>>>> Stashed changes
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -5937,6 +5946,7 @@ Canvas:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542685946}
   m_Enabled: 1
+<<<<<<< Updated upstream
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -6031,6 +6041,7 @@ RectTransform:
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1630688317
+=======
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
@@ -6044,6 +6055,7 @@ RectTransform:
   y: 0
   matrixText: []
 --- !u!114 &1119253265
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7176,9 +7188,15 @@ MonoBehaviour:
   activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
+<<<<<<< Updated upstream
+  value: 3
+  x: 1
+  y: 1
+=======
   value: 1
   x: 2
   y: 0
+>>>>>>> Stashed changes
   matrixText: []
 --- !u!212 &1917049920
 SpriteRenderer:
@@ -9590,6 +9608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -9620,6 +9639,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 412690945002351974}
   m_OnClick:
+=======
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -11240,6 +11260,7 @@ MonoBehaviour:
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
+>>>>>>> Stashed changes
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 371766318}

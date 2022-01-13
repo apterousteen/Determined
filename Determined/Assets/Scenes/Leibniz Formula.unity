@@ -4150,6 +4150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -4163,6 +4164,18 @@ MonoBehaviour:
   m_PresetInfoIsWorld: 1
 --- !u!223 &912502714
 Canvas:
+=======
+  chosenMatrixObject: {fileID: 21300000, guid: 7245e2a074aac40449b8c0374766296b, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: d33af3d6a80c13141ac1854a72fb45c8, type: 3}
+  blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
+  currentState: 0
+  value: 6
+  x: 1
+  y: 2
+  matrixText: []
+--- !u!212 &825833302
+SpriteRenderer:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5972,6 +5985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -5985,6 +5999,18 @@ MonoBehaviour:
   m_PresetInfoIsWorld: 1
 --- !u!223 &1542685950
 Canvas:
+=======
+  chosenMatrixObject: {fileID: 0}
+  activeMatrixObject: {fileID: 0}
+  blockedMatrixObject: {fileID: 0}
+  currentState: 0
+  value: 0
+  x: 0
+  y: 0
+  matrixText: []
+--- !u!114 &1119253265
+MonoBehaviour:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6858,6 +6884,10 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825032652}
   m_Enabled: 1
+<<<<<<< Updated upstream
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+=======
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -7037,6 +7067,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+>>>>>>> Stashed changes
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -10077,6 +10108,9 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
+  m_GameObject: {fileID: 412690945032305100}
+=======
   m_GameObject: {fileID: 1917049916}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -10098,6 +10132,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917049916}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -10373,6 +10408,9 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+<<<<<<< Updated upstream
+--- !u!114 &412690945177200040
+=======
 --- !u!222 &1926958782
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10493,6 +10531,7 @@ RectTransform:
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1957300571
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
