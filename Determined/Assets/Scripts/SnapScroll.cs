@@ -45,7 +45,7 @@ public class SnapScroll : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         float nearestPos = float.MaxValue;
         for (int i = 0; i < panCount; i++)

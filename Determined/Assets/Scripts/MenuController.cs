@@ -17,7 +17,6 @@ public class MenuController : MonoBehaviour
 
     [Header("Levels")]
     public string _newGameLevel;
-    private string levelToLoad;
 
     [Header("Popups")]
     [SerializeField] private GameObject exitPopup = null;
@@ -31,7 +30,6 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject settingsMenu = null;
     [SerializeField] private GameObject lvlsMenu = null;
     [SerializeField] private GameObject mainMenu = null;
-    public string mainMenuForLoad;
 
     [Header("Hint Types")]
     [SerializeField] private Sprite doubleMatrix = null;
@@ -77,19 +75,14 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(_newGameLevel);
     }
 
-    public void LoadLevel2()
+    public void SelectLevel (string levelName)
     {
-        SceneManager.LoadScene("Leibniz Formula");
-    }
-
-    public void LoadLevel3()
-    {
-        SceneManager.LoadScene("Triangles");
+        SceneManager.LoadScene(levelName);
     }
 
     public void GoBackToMenu()
     {
-        SceneManager.LoadScene(mainMenuForLoad);
+        SceneManager.LoadScene("MainMenuTemp");
     }
 
     public void Restart()
@@ -124,7 +117,6 @@ public class MenuController : MonoBehaviour
         exitPopup.SetActive(false);
     }
 
-    //TO DO: make one closepopup method
     public void CloseCreditsPopup()
     {
         creditsPopup.SetActive(false);
@@ -154,6 +146,5 @@ public class MenuController : MonoBehaviour
 
     //TO DO: audio listener
     //TO DO: mute method
-    //TO DO: SFX toddle controller
 }
 
