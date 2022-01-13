@@ -3425,7 +3425,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.36, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3445,8 +3445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenMatrixObject: {fileID: 21300000, guid: e8efda801fb6e98498357319f2fa0463, type: 3}
-  activeMatrixObject: {fileID: 21300000, guid: c6e7bedf340acd0488f1df5bc8db5185, type: 3}
+  chosenMatrixObject: {fileID: 21300000, guid: b7945dbdbfa19fd4ebfdfbcaf54a7c7f, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: 86cc129e64e86574e9a4e02921735823, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
   value: 4
@@ -3493,12 +3493,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: c6e7bedf340acd0488f1df5bc8db5185, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86cc129e64e86574e9a4e02921735823, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3556,7 +3556,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.36, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3576,8 +3576,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenMatrixObject: {fileID: 21300000, guid: 8c308b6930e308640913630e11df05fe, type: 3}
-  activeMatrixObject: {fileID: 21300000, guid: 1769162e0e37db9499e6e56e5e96bb60, type: 3}
+  chosenMatrixObject: {fileID: 21300000, guid: 9e8f309a0052a9a42890afb69c90394c, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: be46c84730fd64541ac1d9eddb1fe70a, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
   value: 0
@@ -3624,12 +3624,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 1769162e0e37db9499e6e56e5e96bb60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be46c84730fd64541ac1d9eddb1fe70a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3762,7 +3762,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.36, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3782,8 +3782,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenMatrixObject: {fileID: 21300000, guid: e8efda801fb6e98498357319f2fa0463, type: 3}
-  activeMatrixObject: {fileID: 21300000, guid: c6e7bedf340acd0488f1df5bc8db5185, type: 3}
+  chosenMatrixObject: {fileID: 21300000, guid: b7945dbdbfa19fd4ebfdfbcaf54a7c7f, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: 86cc129e64e86574e9a4e02921735823, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
   value: 2
@@ -3830,12 +3830,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: c6e7bedf340acd0488f1df5bc8db5185, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86cc129e64e86574e9a4e02921735823, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4161,7 +4161,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.36, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -4181,8 +4181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenMatrixObject: {fileID: 21300000, guid: e8efda801fb6e98498357319f2fa0463, type: 3}
-  activeMatrixObject: {fileID: 21300000, guid: c6e7bedf340acd0488f1df5bc8db5185, type: 3}
+  chosenMatrixObject: {fileID: 21300000, guid: b7945dbdbfa19fd4ebfdfbcaf54a7c7f, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: 86cc129e64e86574e9a4e02921735823, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
   value: 1
@@ -4229,12 +4229,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: c6e7bedf340acd0488f1df5bc8db5185, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86cc129e64e86574e9a4e02921735823, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4694,7 +4694,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.36, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -4714,8 +4714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenMatrixObject: {fileID: 21300000, guid: 8c308b6930e308640913630e11df05fe, type: 3}
-  activeMatrixObject: {fileID: 21300000, guid: 1769162e0e37db9499e6e56e5e96bb60, type: 3}
+  chosenMatrixObject: {fileID: 21300000, guid: 9e8f309a0052a9a42890afb69c90394c, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: be46c84730fd64541ac1d9eddb1fe70a, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
   value: 6
@@ -4762,12 +4762,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 1769162e0e37db9499e6e56e5e96bb60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be46c84730fd64541ac1d9eddb1fe70a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7854,7 +7854,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.36, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -7874,8 +7874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249bf140b4ba32d45827fb947250e802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenMatrixObject: {fileID: 21300000, guid: 8c308b6930e308640913630e11df05fe, type: 3}
-  activeMatrixObject: {fileID: 21300000, guid: 1769162e0e37db9499e6e56e5e96bb60, type: 3}
+  chosenMatrixObject: {fileID: 21300000, guid: 9e8f309a0052a9a42890afb69c90394c, type: 3}
+  activeMatrixObject: {fileID: 21300000, guid: be46c84730fd64541ac1d9eddb1fe70a, type: 3}
   blockedMatrixObject: {fileID: 21300000, guid: 5b2f3a2d8cd444247b9796751e111758, type: 3}
   currentState: 0
   value: 1
@@ -7922,12 +7922,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 1769162e0e37db9499e6e56e5e96bb60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be46c84730fd64541ac1d9eddb1fe70a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -8372,7 +8372,6 @@ MonoBehaviour:
   settingsMenu: {fileID: 0}
   lvlsMenu: {fileID: 0}
   mainMenu: {fileID: 0}
-  mainMenuForLoad: 
   doubleMatrix: {fileID: 0}
   triangle: {fileID: 0}
   leibniz: {fileID: 0}
