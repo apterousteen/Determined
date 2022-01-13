@@ -58,8 +58,6 @@ public class ResultBoard : MonoBehaviour
     private int coefficient = 0;
     private int leibnizSupportPositive = 0;
     private int leibnizSupportNegative = 0;
-    public int[] leibnizX;
-    public int[] leibnizY;
     private int leibnizSupportCount = 0;
     private List<(int, int)> usedAlgebraicComplements = new List<(int, int)>();
 
@@ -133,7 +131,6 @@ public class ResultBoard : MonoBehaviour
     {
         foreach (var matrixObject in matrixObjects)
             matrixObject.MakeMatrixObjectActive();
-        lineController.ClearLines();
     }
 
     private bool CheckForBlockingMatrixObjects(MatrixObject[] objects)
@@ -429,12 +426,6 @@ public class ResultBoard : MonoBehaviour
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isYLineSelected = true;
                 lineController.AddPoints(objects, cornerValue);
-                if (CheckForDuplicates())
-                {
-                    LoseHealth();
-                    MakeBlockedMatrixObjectsActive();
-                    return;
-                }
                 coefficient = cornerValue.value;
                 terms.Add(coefficient);
                 updateBox = true;
@@ -454,12 +445,6 @@ public class ResultBoard : MonoBehaviour
                 var cornerValue = matrixObjects.Where(a => a.currentState == MatrixObjectState.Blocked).First(a => a.x == xElementLocation && a.y == yElementLocation);
                 isXLineSelected = true;
                 lineController.AddPoints(objects, cornerValue);
-                if (CheckForDuplicates())
-                {
-                    LoseHealth();
-                    MakeBlockedMatrixObjectsActive();
-                    return;
-                }
                 coefficient = cornerValue.value;
                 terms.Add(coefficient);
                 updateBox = true;
@@ -494,7 +479,7 @@ public class ResultBoard : MonoBehaviour
                 var cornerValue = objects.First(a => a.x == xMaxPos && a.y == yMaxPos);
                 xElementLocation = xMaxPos;
                 yElementLocation = yMaxPos;
-                if (CheckForDuplicates())
+                if (usedAlgebraicComplements.Count() != 0 && usedAlgebraicComplements.Any(a => a.Item1 == xElementLocation && a.Item2 == yElementLocation))
                 {
                     LoseHealth();
                     return;
@@ -520,24 +505,6 @@ public class ResultBoard : MonoBehaviour
             return;
         }
         UpdateUI();
-    }
-
-    private bool CheckForDuplicates()
-    {
-        if (leibnizX.Length == 0)
-            return usedAlgebraicComplements.Count() != 0 &&
-            usedAlgebraicComplements.Any(a => a.Item1 == xElementLocation && a.Item2 == yElementLocation);
-        var rightLines = false;
-        for(int i = 0; i < 3; i++)
-        {
-            if (leibnizX[i] == xElementLocation && leibnizY[i] == yElementLocation)
-            {
-                rightLines = true;
-                Debug.Log("Good lines");
-            }
-        }
-        return !rightLines || usedAlgebraicComplements.Count() != 0 &&
-            usedAlgebraicComplements.Any(a => a.Item1 == xElementLocation && a.Item2 == yElementLocation);
     }
 
     private void CalculateAnswerForLeibnizForDouble(MatrixObject[] objects)
@@ -572,7 +539,7 @@ public class ResultBoard : MonoBehaviour
                     isYLineSelected = false;
                     
                     updateBox = true;
-                    //lineController.ClearLines();
+                    lineController.ClearLines();
                     UpdateUI();
 
                     if (terms.Count() == 6)
@@ -631,9 +598,7 @@ public class ResultBoard : MonoBehaviour
             this.gameObject.transform.Find("First Panel").gameObject.SetActive(false);
             secondPanel.SetActive(true);
             var newSigns = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Sign").OrderBy(x => x.gameObject.name).ToList();
-            if(ColoredLevel)
-                coloredAnswers = FindObjectsOfType<Image>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
-            else resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
+            resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
             for (int i = 0; i < signs.Count; i++)
                 newSigns[i].text = signs[i].text;
             resultBoxes = FindObjectsOfType<GameObject>().Where(x => x.gameObject.tag == "Result Box").OrderBy(x => x.gameObject.name).ToList();
