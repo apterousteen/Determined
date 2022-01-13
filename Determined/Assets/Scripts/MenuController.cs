@@ -78,20 +78,9 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(_newGameLevel);
     }
 
-<<<<<<< Updated upstream
     public void SelectLevel (string levelName)
     {
         SceneManager.LoadScene(levelName);
-=======
-    public void LoadLevel(int index)
-    {
-        SceneManager.LoadScene(index);
-    }
-
-    public void NextLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
->>>>>>> Stashed changes
     }
 
     public void GoBackToMenu()

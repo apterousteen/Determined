@@ -2002,6 +2002,8 @@ MonoBehaviour:
   updateBox: 0
   boxIndex: 0
   levelWasWon: 0
+  leibnizX: 
+  leibnizY: 
 --- !u!114 &371766316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5896,7 +5898,6 @@ MonoBehaviour:
   settingsMenu: {fileID: 0}
   lvlsMenu: {fileID: 0}
   mainMenu: {fileID: 0}
-  mainMenuForLoad: MainMenuTemp
   doubleMatrix: {fileID: 21300000, guid: 70029106fde6d3c44ad676a0232e2b13, type: 3}
   triangle: {fileID: 21300000, guid: 8ef4ff88cd6f9a048bcc9cb1781a9a65, type: 3}
   leibniz: {fileID: 21300000, guid: 7e5b2db0a9dda894299ba3e4e0d3aae7, type: 3}
@@ -6563,7 +6564,6 @@ MonoBehaviour:
   settingsMenu: {fileID: 0}
   lvlsMenu: {fileID: 0}
   mainMenu: {fileID: 0}
-  mainMenuForLoad: 
   doubleMatrix: {fileID: 0}
   triangle: {fileID: 0}
   leibniz: {fileID: 0}
