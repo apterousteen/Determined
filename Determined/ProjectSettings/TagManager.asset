@@ -11,6 +11,7 @@ TagManager:
   - Result Box
   - Sign
   - Level Menu
+  - Sound Button
   layers:
   - Default
   - TransparentFX

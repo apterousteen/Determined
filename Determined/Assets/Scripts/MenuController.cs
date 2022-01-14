@@ -39,7 +39,6 @@ public class MenuController : MonoBehaviour
 
     public ResultBoard resultBoard;
 
-
     private void Awake()
     {
         resultBoard = FindObjectOfType<ResultBoard>();
@@ -143,32 +142,90 @@ public class MenuController : MonoBehaviour
         {
             Unmute();
             audioManager.muted = false;
+            audioManager.toggle.isOn = true;
+            UpdateSoundUI();
         }
         else
         {
             Mute();
             audioManager.muted = true;
+            audioManager.toggle.isOn = false;
+            UpdateSoundUI();
         }
     }
 
-    private void Mute()
+    public void Mute()
     {
         AudioListener.volume = 0;
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
     }
 
-    private void Unmute()
+    public void Unmute()
     {
         AudioListener.volume = vol;
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
     }
 
+    private void Update()
+    {
+        UpdateSoundUI();
+        try
+        {
+            OpenWinPopup();
+        }
+        catch (Exception)
+        {
+        };
+    }
+
+    public void UpdateSoundUI()
+    {
+        if (audioManager.muted)
+        {
+            try
+            {
+                if (SceneManager.GetActiveScene().name == "MainMenuTemp")
+                {
+                    FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Sound Button").First().GetComponentInChildren<Image>().sprite = audioManager.mutedSprite;
+                }
+                else
+                {
+                    FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Sound Button").First().GetComponentInChildren<Image>().sprite = audioManager.mutedSpriteMini;
+                }
+            }
+            catch (Exception)
+            {
+            };
+        }
+        else
+        {
+            try
+            {
+                if (SceneManager.GetActiveScene().name == "MainMenuTemp")
+                {
+                    FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Sound Button").First().GetComponentInChildren<Image>().sprite = audioManager.unmutedSprite;
+                    //audioManager.toggle.isOn = true;
+                }
+                else
+                {
+                    FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Sound Button").First().GetComponentInChildren<Image>().sprite = audioManager.unmutedSpriteMini;
+                }
+            }
+            catch (Exception)
+            {
+            };
+        }
+    }
+
     public void OpenWinPopup()
     {
+
         if (resultBoard.levelWasWon)
         {
+            Debug.Log("Level Was Won");
             FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Result Button").First().enabled = false;
             StartCoroutine(WaitAndShow(winPopup, 2.0f));
+            resultBoard.levelWasWon = false;
         }//4 secs
     }
 
@@ -177,8 +234,5 @@ public class MenuController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         go.SetActive(true);
     }
-
-    //TO DO: audio listener
-    //TO DO: mute method
 }
 
