@@ -49,12 +49,17 @@ public class MenuController : MonoBehaviour
 
     public void ShowHint()
     {
-        //if (resultBoard.typeOfResult == DeterminantType.DoubleMatrix)
-        //    hintPopup.GetComponentInChildren<Image>().sprite = doubleMatrix;
-       // else if (resultBoard.typeOfResult == DeterminantType.Triangles)
-        //    hintPopup.GetComponentInChildren<Image>().sprite = triangle;
-       // else if (resultBoard.typeOfResult == DeterminantType.Leibniz)
+        if (resultBoard.typeOfResult == DeterminantType.DoubleMatrix)
+            hintPopup.GetComponentInChildren<Image>().sprite = doubleMatrix;
+        else if (resultBoard.typeOfResult == DeterminantType.Triangles)
+            hintPopup.GetComponentInChildren<Image>().sprite = triangle;
+        else if (resultBoard.typeOfResult == DeterminantType.Leibniz)
             hintPopup.GetComponentInChildren<Image>().sprite = leibniz;
+    }
+
+    public void Pressed()
+    {
+        Debug.Log("button pressed");
     }
 
     public static bool GameIsPaused = false;

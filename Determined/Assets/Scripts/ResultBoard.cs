@@ -32,7 +32,6 @@ public class ResultBoard : MonoBehaviour
     public DeterminantType typeOfResult;
 
     public Health health;
-    // I hope it's ok this code is here
     [Header("Flickering of hint button")]
     public SpriteRenderer sprite = null;
     public float flickerDuration;
@@ -95,7 +94,7 @@ public class ResultBoard : MonoBehaviour
         }
         else resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
-        //
+        
         resultBoxes = FindObjectsOfType<GameObject>().Where(x => x.gameObject.tag == "Result Box").OrderBy(x => x.gameObject.name).ToList();
         matrixObjects = FindObjectsOfType<MatrixObject>();
         buttonsManager = GetComponent<ButtonsManager>();

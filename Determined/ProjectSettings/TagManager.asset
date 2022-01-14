@@ -10,6 +10,7 @@ TagManager:
   - Result Button
   - Result Box
   - Sign
+  - Level Menu
   layers:
   - Default
   - TransparentFX
