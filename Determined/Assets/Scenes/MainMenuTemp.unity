@@ -872,7 +872,7 @@ RectTransform:
   - {fileID: 721413805}
   - {fileID: 1755386892}
   m_Father: {fileID: 809952792}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1754,7 +1754,7 @@ RectTransform:
   - {fileID: 1222469307}
   - {fileID: 1247649623}
   m_Father: {fileID: 809952792}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2300,7 +2300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.9997559, y: -0.050598145}
+  m_AnchoredPosition: {x: 3.9997559, y: -0.05053711}
   m_SizeDelta: {x: 155.36047, y: 0.0010986328}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435911214
@@ -3852,8 +3852,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 6519168543769574062}
-  - {fileID: 357441001}
   - {fileID: 136619335}
+  - {fileID: 357441001}
   - {fileID: 126301970}
   - {fileID: 41657668}
   - {fileID: 1394371783}
@@ -3899,8 +3899,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000021459, y: -38}
-  m_SizeDelta: {x: 279.31, y: 484.52}
+  m_AnchoredPosition: {x: -0.0000021459, y: 0.000011444}
+  m_SizeDelta: {x: 295.5, y: 484.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &833094219
 MonoBehaviour:
@@ -3925,7 +3925,7 @@ MonoBehaviour:
   m_text: 'ivan zarembo
 
 
-    zhan taalaybek
+    ayzhan taalaybek
 
 
     alexander khatkevich
@@ -3964,8 +3964,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5068,6 +5068,7 @@ GameObject:
   - component: {fileID: 1126252463}
   - component: {fileID: 1126252466}
   - component: {fileID: 1126252464}
+  - component: {fileID: 1126252465}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -5176,6 +5177,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!111 &1126252465
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126252462}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!222 &1126252466
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6037,7 +6053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.025238037, y: -0.15557861}
+  m_AnchoredPosition: {x: 0.025268555, y: -0.15551758}
   m_SizeDelta: {x: -155.36, y: -0.0010986}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415409351 stripped
@@ -7007,7 +7023,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -45}
-  m_SizeDelta: {x: 452.14, y: 645.33}
+  m_SizeDelta: {x: 452.14, y: 730.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1686172172
 MonoBehaviour:
@@ -8710,7 +8726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.9654e-10, y: 255}
+  m_AnchoredPosition: {x: 3.9654e-10, y: 303}
   m_SizeDelta: {x: 326.54, y: 79.815}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078372640

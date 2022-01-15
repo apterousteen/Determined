@@ -2220,6 +2220,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6963103240650804584, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963103240650804584, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963103240650804584, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 414
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963103240650804584, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 736
+      objectReference: {fileID: 0}
     - target: {fileID: 6963103240650804586, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
       propertyPath: m_Name
       value: HintMenu 1
@@ -4288,6 +4304,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9111764560482276387, guid: 46405dd4d0a4cbe4999d34f674dccfed, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111764560482276387, guid: 46405dd4d0a4cbe4999d34f674dccfed, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111764560482276387, guid: 46405dd4d0a4cbe4999d34f674dccfed, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 414
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111764560482276387, guid: 46405dd4d0a4cbe4999d34f674dccfed, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 736
+      objectReference: {fileID: 0}
     - target: {fileID: 9111764560482276391, guid: 46405dd4d0a4cbe4999d34f674dccfed, type: 3}
       propertyPath: m_Name
       value: PauseMenu 1
@@ -4352,6 +4384,22 @@ PrefabInstance:
     - target: {fileID: 165485471068790221, guid: 4f68fc3c45659d8449e4372018765ca6, type: 3}
       propertyPath: m_Name
       value: WinMenu 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 165485471068790257, guid: 4f68fc3c45659d8449e4372018765ca6, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 165485471068790257, guid: 4f68fc3c45659d8449e4372018765ca6, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 165485471068790257, guid: 4f68fc3c45659d8449e4372018765ca6, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 414
+      objectReference: {fileID: 0}
+    - target: {fileID: 165485471068790257, guid: 4f68fc3c45659d8449e4372018765ca6, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 736
       objectReference: {fileID: 0}
     - target: {fileID: 165485471068790259, guid: 4f68fc3c45659d8449e4372018765ca6, type: 3}
       propertyPath: m_Pivot.x
@@ -7068,6 +7116,22 @@ PrefabInstance:
     - target: {fileID: 2344318510158830113, guid: 2a4242c1ca518604ba091cf76a942141, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344318510722644736, guid: 2a4242c1ca518604ba091cf76a942141, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344318510722644736, guid: 2a4242c1ca518604ba091cf76a942141, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344318510722644736, guid: 2a4242c1ca518604ba091cf76a942141, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 414
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344318510722644736, guid: 2a4242c1ca518604ba091cf76a942141, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 736
       objectReference: {fileID: 0}
     - target: {fileID: 2344318510722644738, guid: 2a4242c1ca518604ba091cf76a942141, type: 3}
       propertyPath: m_Pivot.x
