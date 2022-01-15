@@ -12,6 +12,7 @@ TagManager:
   - Sign
   - Level Menu
   - Sound Button
+  - AudioManager
   layers:
   - Default
   - TransparentFX

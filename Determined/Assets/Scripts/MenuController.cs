@@ -14,7 +14,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Slider volumeSlider = null;
     [SerializeField] private float defaultVolume = 0.5f;
     [SerializeField] private float vol;
-    AudioManager audioManager;
+    public AudioManager audioManager;
 
     [Header("Levels")]
     public string _newGameLevel;
@@ -42,7 +42,7 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         resultBoard = FindObjectOfType<ResultBoard>();
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         SetVolume(defaultVolume);
     }
 
@@ -233,6 +233,11 @@ public class MenuController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         go.SetActive(true);
+    }
+
+    public void PlayButtonSound()
+    {
+        audioManager.Play("Button");
     }
 }
 

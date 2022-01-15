@@ -30,7 +30,7 @@ public abstract class MatrixObject : MonoBehaviour
     {
         lineController = FindObjectOfType<LineController>();
         boxCollider = GetComponent<BoxCollider2D>();
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     protected void Update()

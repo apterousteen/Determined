@@ -18,6 +18,7 @@ public enum DeterminantType
 public class ResultBoard : MonoBehaviour
 {
     public bool ColoredLevel;
+    public bool hinted;
     public List<Image> coloredAnswers;
 
     public List<int> terms;
@@ -91,6 +92,8 @@ public class ResultBoard : MonoBehaviour
         if(ColoredLevel)
         {
             coloredAnswers = FindObjectsOfType<Image>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
+            if (hinted)
+                coloredAnswers[0].color = new Color(255, 255, 255, 0.6f);
         }
         else resultElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.gameObject.tag == "Term").OrderBy(x => x.gameObject.name).ToList();
         signElementsUI = FindObjectsOfType<TMP_Text>().Where(x => x.text == "?").OrderBy(x => x.gameObject.name).ToList();
@@ -146,6 +149,8 @@ public class ResultBoard : MonoBehaviour
         if (ColoredLevel)
         {
             coloredAnswers[i].color = new Color(255, 255, 255, 100);
+            if (hinted && i < coloredAnswers.Count - 2)
+                coloredAnswers[i + 1].color = new Color(255, 255, 255, 0.6f);
         }
         else resultElementsUI[i].text = terms[i].ToString();
     }
@@ -432,6 +437,8 @@ public class ResultBoard : MonoBehaviour
                 {
                     LoseHealth();
                     MakeBlockedMatrixObjectsActive();
+                    isXLineSelected = false;
+                    isYLineSelected = false;
                     return;
                 }
                 coefficient = cornerValue.value;
@@ -457,6 +464,8 @@ public class ResultBoard : MonoBehaviour
                 {
                     LoseHealth();
                     MakeBlockedMatrixObjectsActive();
+                    isXLineSelected = false;
+                    isYLineSelected = false;
                     return;
                 }
                 coefficient = cornerValue.value;
@@ -496,6 +505,8 @@ public class ResultBoard : MonoBehaviour
                 if (CheckForDuplicates())
                 {
                     LoseHealth();
+                    isXLineSelected = false;
+                    isYLineSelected = false;
                     return;
                 }
                 else
