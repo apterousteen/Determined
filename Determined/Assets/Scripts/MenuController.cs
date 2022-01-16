@@ -56,11 +56,6 @@ public class MenuController : MonoBehaviour
             hintPopup.GetComponentInChildren<Image>().sprite = leibniz;
     }
 
-    public void Pressed()
-    {
-        Debug.Log("button pressed");
-    }
-
     public static bool GameIsPaused = false;
 
     public void Resume()
@@ -142,15 +137,15 @@ public class MenuController : MonoBehaviour
         {
             Unmute();
             audioManager.muted = false;
-            audioManager.toggle.isOn = true;
-            UpdateSoundUI();
+            //audioManager.toggle.isOn = true;
+            //UpdateSoundUI();
         }
         else
         {
             Mute();
             audioManager.muted = true;
-            audioManager.toggle.isOn = false;
-            UpdateSoundUI();
+            //audioManager.toggle.isOn = false;
+            //UpdateSoundUI();
         }
     }
 
@@ -187,6 +182,7 @@ public class MenuController : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == "MainMenuTemp")
                 {
                     FindObjectsOfType<Button>().Where(x => x.gameObject.tag == "Sound Button").First().GetComponentInChildren<Image>().sprite = audioManager.mutedSprite;
+                    //audioManager.toggle.isOn = false;
                 }
                 else
                 {
@@ -240,4 +236,3 @@ public class MenuController : MonoBehaviour
         audioManager.Play("Button");
     }
 }
-

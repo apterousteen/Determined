@@ -3887,6 +3887,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6963103240251150845, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9e9f0cd400a879248b05ed90f4cedf32, type: 3}
     - target: {fileID: 6963103240650804566, guid: b0fffae603d426143a3c3160c35d5a11, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7724,18 +7728,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Button
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 174443469}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: ShowHint
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &412690943956942275
