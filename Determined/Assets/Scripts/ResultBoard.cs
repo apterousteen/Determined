@@ -369,10 +369,7 @@ public class ResultBoard : MonoBehaviour
 
     private int CalculateTriangleOperations(int first, int second, int third)
     {
-        if (!buttonsManager.signPlus)
-            return -1 * first * second * third;
-        else
-            return first * second * third;
+        return first * second * third;
     }
 
     private int CalculateTriangleDeterminant()
@@ -534,8 +531,13 @@ public class ResultBoard : MonoBehaviour
 
     private bool CheckForDuplicates()
     {
+        bool matchesWithSign = false;
+        if (terms.Count == 2 && xElementLocation == 1)
+            matchesWithSign = true;
+        if (terms.Count != 2 && xElementLocation != 1)
+            matchesWithSign = true;
         if (leibnizX.Length == 0)
-            return usedAlgebraicComplements.Count() != 0 &&
+            return !matchesWithSign || usedAlgebraicComplements.Count() != 0 &&
             usedAlgebraicComplements.Any(a => a.Item1 == xElementLocation && a.Item2 == yElementLocation);
         var rightLines = false;
         for(int i = 0; i < 3; i++)
@@ -546,12 +548,17 @@ public class ResultBoard : MonoBehaviour
                 Debug.Log("Good lines");
             }
         }
-        return !rightLines || usedAlgebraicComplements.Count() != 0 &&
+        return !matchesWithSign || !rightLines || usedAlgebraicComplements.Count() != 0 &&
             usedAlgebraicComplements.Any(a => a.Item1 == xElementLocation && a.Item2 == yElementLocation);
     }
 
     private void CalculateAnswerForLeibnizForDouble(MatrixObject[] objects)
     {
+        if(leibnizX.Length == 0)
+        {
+            leibnizX = new int[] { 0, 1, 2 };
+            leibnizY = new int[] { yElementLocation, yElementLocation, yElementLocation };
+        }
         if (objects.Count() == 2)
         {
             if (objects[0].x != objects[1].x && objects[0].y != objects[1].y)

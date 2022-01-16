@@ -23,6 +23,11 @@ public class ButtonsManager : MonoBehaviour
 
     public void SetMinusSign()
     {
+        if (resultBoard.typeOfResult == DeterminantType.Leibniz && resultBoard.terms.Count != 2)
+        {
+            resultBoard.LoseHealth();
+            return;
+        }
         var uiELement = signElementsUI.Where(x => x.text == "?").First();
         uiELement.text = "-";
         uiELement.color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
@@ -34,7 +39,8 @@ public class ButtonsManager : MonoBehaviour
 
     public void SetPlusSign()
     {
-        if(resultBoard.typeOfResult == DeterminantType.DoubleMatrix)
+        if(resultBoard.typeOfResult == DeterminantType.DoubleMatrix || 
+            (resultBoard.typeOfResult == DeterminantType.Leibniz && resultBoard.terms.Count != 4))
         {
             resultBoard.LoseHealth();
             return;
