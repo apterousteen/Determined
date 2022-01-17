@@ -28,6 +28,12 @@ public class ButtonsManager : MonoBehaviour
             resultBoard.LoseHealth();
             return;
         }
+        if(resultBoard.typeOfResult == DeterminantType.Triangles && resultBoard.triangleSequences["DiagonalNegative"]
+            && resultBoard.triangleSequences["UpperTriangleNegative"] && resultBoard.triangleSequences["BottomTriangleNegative"])
+        {
+            resultBoard.LoseHealth();
+            return;
+        }
         var uiELement = signElementsUI.Where(x => x.text == "?").First();
         uiELement.text = "-";
         uiELement.color = new Color(0.5490196f, 0.7960785f, 0.9333334f, 1);
@@ -41,6 +47,12 @@ public class ButtonsManager : MonoBehaviour
     {
         if(resultBoard.typeOfResult == DeterminantType.DoubleMatrix || 
             (resultBoard.typeOfResult == DeterminantType.Leibniz && resultBoard.terms.Count != 4))
+        {
+            resultBoard.LoseHealth();
+            return;
+        }
+        if (resultBoard.typeOfResult == DeterminantType.Triangles && resultBoard.triangleSequences["DiagonalPositive"]
+            && resultBoard.triangleSequences["UpperTrianglePositive"] && resultBoard.triangleSequences["BottomTrianglePositive"])
         {
             resultBoard.LoseHealth();
             return;

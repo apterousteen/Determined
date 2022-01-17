@@ -49,7 +49,7 @@ public class ResultBoard : MonoBehaviour
     public bool updateBox;
     public int boxIndex = 0;
     private bool twoTermsCalculated = false;
-    public bool levelWasWon = false;
+    public bool levelWasWon;
 
     private int xElementLocation;
     private int yElementLocation;
@@ -313,13 +313,18 @@ public class ResultBoard : MonoBehaviour
 
                     cornerTriangleName = triangleSequences.ElementAt(2).Key;
                 }
-                else
+                else if(terms.Count != 0)
                 {
                     LoseHealth();
                     return;
                 }
+                else
+                {
+                    buttonsManager.signPlus = false;
+                    Debug.Log("Sign is minus");
+                }
             }
-            else if (!buttonsManager.signPlus)
+            if (!buttonsManager.signPlus)
             {
                 if (objects.Any(a => a.x == 2 && a.y == 0) && objects.Any(a => a.x == 1 && a.y == 1) &&
                     objects.Any(a => a.x == 0 && a.y == 2) && !triangleSequences["DiagonalNegative"])

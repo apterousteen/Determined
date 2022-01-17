@@ -56,6 +56,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
+    }
+
     private void Start()
     {
         Play("Theme");
