@@ -1,2 +1,7 @@
 # Determined
-Game about matrix's determinant on unity
+Обучающая игра по вычислению определителя матрицы.
+
+**Ссылка:** https://qtpierogi.itch.io/determined
+# Роли в команде
+* UX/UI-дизайнер
+* Unity-разработчик 
